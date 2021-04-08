@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 """Initial Conditions"""
 init_altitude = 400*10**3 #[m]
-init_velocity = 8000    #[m/s]
+init_v = 8000    #[m/s]
 gamma = np.radians(12)               #[degrees]
 
 
@@ -46,8 +46,8 @@ def atmo_density(h):  #Calculates density based on altitude
 def atmo_density_plot():#Plots density vs altitude + compares with US Standard
     x_vals = np.linspace(0,100*10**3,1000)
     y_vals = []
-    for x in x_val:
-        y_val.append(atmo_density(x))
+    for x in x_vals:
+        y_vals.append(atmo_density(x))
     plt.plot((x_vals/1000),y_vals,label = "Calculated")
     plt.plot(US_atmo_heights,US_atmo_vals,label = "US Standard")
     plt.title("Atmospheric Density vs Altitude")
@@ -57,27 +57,41 @@ def atmo_density_plot():#Plots density vs altitude + compares with US Standard
     plt.show()
 
 def velocity(h): #calculates the velocity at a given altitude
-    v = init_velocity*np.exp(-(((surface_density*y0)/(2*BC*np.sin(gamma)))*\
+    v = init_v*np.exp(-(((surface_density*y0)/(2*BC*np.sin(gamma)))*\
                              np.exp(-h/y0)))
     return v
 
-def velocity_plot():
-    x_vals = np.linspace(0,init_altitude,100000)
-    y_vals = []
+def deceleration(h): #cqlculates acceleration based on altitude
+    a = ((surface_density*(init_v**2))/(2*BC*g)*np.exp(-h/y0))*np.exp(-\
+        (((surface_density*y0)/(BC*np.sin(gamma)))*np.exp(-h/y0)))
+    return a
+
+def vs_altitude_plot(init_alt_value): #plots velocity and acceleration vs altitude
+    x_vals = np.linspace(0,init_alt_value,100000)
+    v_vals = []
+    a_vals = []
     for x in x_vals:
-        y_vals.append(((velocity(x)/init_velocity)*100))
-    plt.plot((x_vals/1000),y_vals)
+        v_vals.append(velocity(x))
+        a_vals.append(deceleration(x))
+    fig,ax = plt.subplots()
+    ax.plot((x_vals/1000),v_vals,color="blue")
+    ax.set_xlabel("Altitude (km)")
+    ax.set_ylabel("Velocity (m/s)",color = "blue")
+    ax2 = ax.twinx()
+    ax2.plot((x_vals/1000),a_vals,color="red")
+    ax2.set_ylabel("Deceleration (m/s^2)",color = "red")
     plt.title("Spacecraft Velocity vs Altitude")
-    plt.xlabel("Altitude (km)")
-    plt.ylabel("Velocity (m/s)")
     plt.show()
+    
         
             
 
 
 """Running the Program"""
 #atmo_density_plot()
-velocity_plot()
+vs_altitude_plot(init_altitude)
+vs_altitude_plot(150000)
+
 
 
 
