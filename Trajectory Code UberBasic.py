@@ -56,23 +56,29 @@ def atmo_density_plot():#Plots density vs altitude + compares with US Standard
     plt.ylabel("Density (kg/m^3)")
     plt.show()
 
-def velocity(h): #calculates the velocity at a given altitude
-    v = init_v*np.exp(-(((surface_density*y0)/(2*BC*np.sin(gamma)))*\
+def velocity(init_alt): #calculates the velocity at a given altitude
+    alt_vals = np.linspace(0,init_alt,init_alt+1)
+    v_vals = np.zeros(init_alt+1)
+    i = 0
+    for h in alt_vals:
+        v_vals[i] = init_v*np.exp(-(((surface_density*y0)/(2*BC*np.sin(gamma)))*\
                              np.exp(-h/y0)))
-    return v
+        i += 1
+    return v_vals
 
-def deceleration(h): #cqlculates acceleration based on altitude
-    a = ((surface_density*(init_v**2))/(2*BC*g)*np.exp(-h/y0))*np.exp(-\
+def deceleration(init_alt): #cqlculates acceleration based on altitude
+    alt_vals = np.linspace(0,init_alt,init_alt+1)
+    a_vals = np.zeros(init_alt+1)
+    i = 0
+    for h in alt_vals:
+        a_vals[i] = ((surface_density*(init_v**2))/(2*BC*g)*np.exp(-h/y0))*np.exp(-\
         (((surface_density*y0)/(BC*np.sin(gamma)))*np.exp(-h/y0)))
-    return a
+        i += 1
+    return a_vals
 
-def vs_altitude_plot(init_alt_value): #plots velocity and acceleration vs altitude
-    x_vals = np.linspace(0,init_alt_value,100000)
-    v_vals = []
-    a_vals = []
-    for x in x_vals:
-        v_vals.append(velocity(x))
-        a_vals.append(deceleration(x))
+def vs_altitude_plot(v_vals,a_vals,init_alt): 
+    #plots velocity and acceleration vs altitude
+    x_vals = np.linspace(0,init_alt,init_alt+1)
     fig,ax = plt.subplots()
     ax.plot((x_vals/1000),v_vals,color="blue")
     ax.set_xlabel("Altitude (km)")
@@ -89,8 +95,9 @@ def vs_altitude_plot(init_alt_value): #plots velocity and acceleration vs altitu
 
 """Running the Program"""
 #atmo_density_plot()
-vs_altitude_plot(init_altitude)
-vs_altitude_plot(150000)
+v_vals = velocity(150000)
+a_vals = deceleration(150000)
+vs_altitude_plot(v_vals,a_vals,150000)
 
 
 
