@@ -27,10 +27,11 @@ US_atmo_heights = [0,3,5,7,10,15,25,50,80] #Corresponding altitudes
 
 
 """Vehicle Properties"""
+r = 1.5
 mass = 10      #[kg]
 Cd = 1          #Coefficient of Drag
 Cl = 0          #Coefficient of Lift
-S = 2.5           #[m^2] Reference Area - Based on CAD model
+S = np.pi*r**2           #[m^2] Reference Area - Based on CAD model
 BC = mass/(S*Cd)
 
 """Functions/Calculations"""
@@ -79,6 +80,7 @@ def deceleration(init_alt): #cqlculates acceleration based on altitude
     return a_vals
 
 def heat_flux(init_alt,v_vals,rho_vals):
+    #Calculating heat flux at each altitude
     alt_vals = np.linspace(0,init_alt,init_alt+1)
     q_vals = np.zeros(init_alt+1)
     i = 0
@@ -109,6 +111,7 @@ rho_vals = atmo_density(Graphing_Altitude)
 atmo_density_plot(Graphing_Altitude,rho_vals)
 v_vals = velocity(Graphing_Altitude)
 a_vals = deceleration(Graphing_Altitude)
+q_vals = heat_flux(Graphing_Altitude,v_vals,rho_vals)
 vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
 
 
