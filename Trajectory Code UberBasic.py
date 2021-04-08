@@ -39,16 +39,18 @@ BC = mass/(S*Cd)
  #   b = - (g/gas_constant)/(abs_temp)
   #  return(b)
 
-def atmo_density(h):  #Calculates density based on altitude
-    rho = surface_density*np.exp(beta*h)
-    return rho
+def atmo_density(init_alt):  #Calculates density based on altitude
+    alt_vals = np.linspace(0,init_alt,init_alt+1)
+    rho_vals = np.zeros(init_alt+1)
+    i = 0
+    for h in alt_vals:
+        rho_vals[i] = surface_density*np.exp(-beta*h)
+        i += 1
+    return rho_vals
 
-def atmo_density_plot():#Plots density vs altitude + compares with US Standard
-    x_vals = np.linspace(0,100*10**3,1000)
-    y_vals = []
-    for x in x_vals:
-        y_vals.append(atmo_density(x))
-    plt.plot((x_vals/1000),y_vals,label = "Calculated")
+def atmo_density_plot(init_alt,rho):#Plots density vs altitude + compares with US Standard
+    alt_vals = np.linspace(0,init_alt,init_alt+1) 
+    plt.plot((alt_vals/1000),rho,label = "Calculated")
     plt.plot(US_atmo_heights,US_atmo_vals,label = "US Standard")
     plt.title("Atmospheric Density vs Altitude")
     plt.legend()
@@ -76,6 +78,14 @@ def deceleration(init_alt): #cqlculates acceleration based on altitude
         i += 1
     return a_vals
 
+def heat_flux(init_alt,v_vals,rho_vals):
+    alt_vals = np.linspace(0,init_alt,init_alt+1)
+    q_vals = np.zeros(init_alt+1)
+    i = 0
+    for h in alt_vals:
+        q_vals[i] = 1.83*(10**-4)*(v_vals[i]**3)*np.sqrt(rho_vals[i]/r)
+    return q_vals
+
 def vs_altitude_plot(v_vals,a_vals,init_alt): 
     #plots velocity and acceleration vs altitude
     x_vals = np.linspace(0,init_alt,init_alt+1)
@@ -85,7 +95,7 @@ def vs_altitude_plot(v_vals,a_vals,init_alt):
     ax.set_ylabel("Velocity (m/s)",color = "blue")
     ax2 = ax.twinx()
     ax2.plot((x_vals/1000),a_vals,color="red")
-    ax2.set_ylabel("Deceleration (m/s^2)",color = "red")
+    ax2.set_ylabel("Deceleration (g's)",color = "red")
     plt.title("Spacecraft Velocity vs Altitude")
     plt.show()
     
@@ -94,10 +104,12 @@ def vs_altitude_plot(v_vals,a_vals,init_alt):
 
 
 """Running the Program"""
-#atmo_density_plot()
-v_vals = velocity(150000)
-a_vals = deceleration(150000)
-vs_altitude_plot(v_vals,a_vals,150000)
+Graphing_Altitude = 150000
+rho_vals = atmo_density(Graphing_Altitude)
+atmo_density_plot(Graphing_Altitude,rho_vals)
+v_vals = velocity(Graphing_Altitude)
+a_vals = deceleration(Graphing_Altitude)
+vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
 
 
 
