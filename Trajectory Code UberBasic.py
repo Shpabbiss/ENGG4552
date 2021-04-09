@@ -82,11 +82,25 @@ def deceleration(init_alt): #cqlculates acceleration based on altitude
 def heat_flux(init_alt,v_vals,rho_vals):
     #Calculating heat flux at each altitude
     alt_vals = np.linspace(0,init_alt,init_alt+1)
-    q_vals = np.zeros(init_alt+1)
+    q_vals1 = np.zeros(init_alt+1)
+    q_vals2 = np.zeros(init_alt+1)
     i = 0
     for h in alt_vals:
-        q_vals[i] = 1.83*(10**-4)*(v_vals[i]**3)*np.sqrt(rho_vals[i]/r)
-    return q_vals
+        #q_vals 1 is the formula found in lit review, 2 is from AERO4800
+        q_vals1[i] = 1.83*(10**-4)*(v_vals[i]**3)*np.sqrt(rho_vals[i]/r)
+        q_vals2[i] = np.sqrt(surface_density)*(init_v**3)*np.exp(-h/(2*y0))*\
+        np.exp(((-3*surface_density*y0)/(2*BC*np.sin(gamma)))*np.exp(-h/y0))
+    return q_vals1
+
+def heat_flux_plot(q1,init_alt):
+    x_vals = np.linspace(0,init_alt,init_alt+1)
+    plt.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
+    #plt.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
+    plt.legend()
+    plt.title("Heat Flux vs Altitude")
+    plt.xlabel("Altitude (km)")
+    plt.ylabel("Heat Flux q (J/s)")
+    plt.show()        
 
 def vs_altitude_plot(v_vals,a_vals,init_alt): 
     #plots velocity and acceleration vs altitude
@@ -111,9 +125,9 @@ rho_vals = atmo_density(Graphing_Altitude)
 atmo_density_plot(Graphing_Altitude,rho_vals)
 v_vals = velocity(Graphing_Altitude)
 a_vals = deceleration(Graphing_Altitude)
-q_vals = heat_flux(Graphing_Altitude,v_vals,rho_vals)
+q_vals1 = heat_flux(Graphing_Altitude,v_vals,rho_vals)
 vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
-
+heat_flux_plot(q_vals1,Graphing_Altitude)
 
 
 
