@@ -49,7 +49,8 @@ def atmo_density(init_alt):  #Calculates density based on altitude
         i += 1
     return rho_vals
 
-def atmo_density_plot(init_alt,rho):#Plots density vs altitude + compares with US Standard
+def atmo_density_plot(init_alt,rho):
+    #Plots density vs altitude + compares with US Standard
     alt_vals = np.linspace(0,init_alt,init_alt+1) 
     plt.plot((alt_vals/1000),rho,label = "Calculated")
     plt.plot(US_atmo_heights,US_atmo_vals,label = "US Standard")
@@ -64,8 +65,8 @@ def velocity(init_alt): #calculates the velocity at a given altitude
     v_vals = np.zeros(init_alt+1)
     i = 0
     for h in alt_vals:
-        v_vals[i] = init_v*np.exp(-(((surface_density*y0)/(2*BC*np.sin(gamma)))*\
-                             np.exp(-h/y0)))
+        v_vals[i] = init_v*np.exp(-(((surface_density*y0)/\
+                                     (2*BC*np.sin(gamma)))*np.exp(-h/y0)))
         i += 1
     return v_vals
 
@@ -74,8 +75,8 @@ def deceleration(init_alt): #cqlculates acceleration based on altitude
     a_vals = np.zeros(init_alt+1)
     i = 0
     for h in alt_vals:
-        a_vals[i] = ((surface_density*(init_v**2))/(2*BC*g)*np.exp(-h/y0))*np.exp(-\
-        (((surface_density*y0)/(BC*np.sin(gamma)))*np.exp(-h/y0)))
+        a_vals[i] = ((surface_density*(init_v**2))/(2*BC*g)*np.exp(-h/y0))*\
+            np.exp(-(((surface_density*y0)/(BC*np.sin(gamma)))*np.exp(-h/y0)))
         i += 1
     return a_vals
 
@@ -90,6 +91,7 @@ def heat_flux(init_alt,v_vals,rho_vals):
         q_vals1[i] = 1.83*(10**-4)*(v_vals[i]**3)*np.sqrt(rho_vals[i]/r)
         q_vals2[i] = np.sqrt(surface_density)*(init_v**3)*np.exp(-h/(2*y0))*\
         np.exp(((-3*surface_density*y0)/(2*BC*np.sin(gamma)))*np.exp(-h/y0))
+        i+=1
     return q_vals1
 
 def heat_flux_plot(q1,init_alt):
