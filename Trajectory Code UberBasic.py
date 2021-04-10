@@ -92,12 +92,12 @@ def heat_flux(init_alt,v_vals,rho_vals):
         q_vals2[i] = np.sqrt(surface_density)*(init_v**3)*np.exp(-h/(2*y0))*\
         np.exp(((-3*surface_density*y0)/(2*BC*np.sin(gamma)))*np.exp(-h/y0))
         i+=1
-    return q_vals1
+    return q_vals1, q_vals2
 
-def heat_flux_plot(q1,init_alt):
+def heat_flux_plot(q1,q2,init_alt):
     x_vals = np.linspace(0,init_alt,init_alt+1)
     plt.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
-    #plt.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
+    plt.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
     plt.legend()
     plt.title("Heat Flux vs Altitude")
     plt.xlabel("Altitude (km)")
@@ -127,9 +127,9 @@ rho_vals = atmo_density(Graphing_Altitude)
 atmo_density_plot(Graphing_Altitude,rho_vals)
 v_vals = velocity(Graphing_Altitude)
 a_vals = deceleration(Graphing_Altitude)
-q_vals1 = heat_flux(Graphing_Altitude,v_vals,rho_vals)
+q_vals1,q_vals2 = heat_flux(Graphing_Altitude,v_vals,rho_vals)
 vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
-heat_flux_plot(q_vals1,Graphing_Altitude)
+heat_flux_plot(q_vals1,q_vals2,Graphing_Altitude)
 
 
 
