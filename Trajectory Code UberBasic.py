@@ -95,14 +95,26 @@ def heat_flux(init_alt,v_vals,rho_vals):
     return q_vals1, q_vals2
 
 def heat_flux_plot(q1,q2,init_alt):
+    #This Works its just the same line on the graph - wack
     x_vals = np.linspace(0,init_alt,init_alt+1)
-    plt.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
-    plt.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
-    plt.legend()
+    fig,ax = plt.subplots()
+    ax.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
+    ax.set_xlabel("Altitude (km)")
+    ax.set_ylabel("Heat Flux (J/s) - Lit Review")
+    ax2 = ax.twinx()
+    ax2.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
+    ax2.set_ylabel("Heat Flux (J/s) - AERO4800")
     plt.title("Heat Flux vs Altitude")
-    plt.xlabel("Altitude (km)")
-    plt.ylabel("Heat Flux q (J/s)")
-    plt.show()        
+    #plt.legend()
+    plt.show()
+    
+    #plt.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
+    #plt.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
+    #plt.legend()
+    #plt.title("Heat Flux vs Altitude")
+    #plt.xlabel("Altitude (km)")
+    #plt.ylabel("Heat Flux q (J/s)")
+    #plt.show()        
 
 def vs_altitude_plot(v_vals,a_vals,init_alt): 
     #plots velocity and acceleration vs altitude
