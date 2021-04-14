@@ -31,8 +31,11 @@ r = 1.5
 mass = 10      #[kg]
 Cd = 1          #Coefficient of Drag
 Cl = 0          #Coefficient of Lift
+Cfavg = 0.02         #Body Averaged Skin Friction Coefficient (PLACEHOLDER 
+# UNTIL CFD- value taken from 4800 powerpoint)         
 S = np.pi*r**2           #[m^2] Reference Area - Based on CAD model
-BC = mass/(S*Cd)
+Sw = S          #[m^2] Whole Exposed Surface - Based on CAD model
+BC = mass/(S*Cd) #Ballistic Coefficient 
 
 """Functions/Calculations"""
 
@@ -129,8 +132,10 @@ def vs_altitude_plot(v_vals,a_vals,init_alt):
     plt.title("Spacecraft Velocity vs Altitude")
     plt.show()
     
-        
-            
+def total_heat():
+    #Calculates total heat load over trajectory Q
+    Qtot = (mass/4)*((Cfavg*Sw)/(Cd*S))*(init_v)**2
+    return Qtot        
 
 
 """Running the Program"""
@@ -142,7 +147,8 @@ a_vals = deceleration(Graphing_Altitude)
 q_vals1,q_vals2 = heat_flux(Graphing_Altitude,v_vals,rho_vals)
 vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
 heat_flux_plot(q_vals1,q_vals2,Graphing_Altitude)
-
+Qtot = total_heat()
+print("Total heat load absorbed =",Qtot*10**-6,"MJ/kg")
 
 
     
