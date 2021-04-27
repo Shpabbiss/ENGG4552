@@ -149,7 +149,7 @@ vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
 heat_flux_plot(q_vals1,q_vals2,Graphing_Altitude)
 Qtot = total_heat()
 qmax = np.amax(q_vals2)
-qat = np.where(q_vals2 == numpy.amax(q_vals2))
+qat = np.where(q_vals2 == np.amax(q_vals2))
 alt_vals = np.linspace(0,Graphing_Altitude,Graphing_Altitude+1)
 print("Total heat load absorbed =",round(Qtot*10**-6,3),"MJ/kg")
 print('Maximum heat flux is',round(qmax*10**-9,3),'MJ/s at',\
