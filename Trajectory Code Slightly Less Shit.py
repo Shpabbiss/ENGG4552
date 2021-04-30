@@ -23,8 +23,8 @@ S = np.pi*noser**2 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 0.005 #[s]
-time = 420 #[s]
+dt = 1 #[s]
+time = 1000 #[s]
 steps = time/dt + 1
 
 
@@ -67,8 +67,10 @@ def wackycalcs():
 
         v = np.sqrt((vx**2)+(vy**2))
         alt_vals[i] = alt
-        #print("alt =",alt)
+        if t > 485 and t < 486:
+            print("t =",t,"alt =",alt,"v = ",v, "fpa = ,",fpa)
         #print("v = ",v)
+        #print("t =",t)
         v_vals[i] = v
         rho = density(alt)
         g = g_acc(alt)
@@ -76,9 +78,14 @@ def wackycalcs():
         Fx = -dragval*np.cos(fpa)
         Fy = mass*g - dragval*np.sin(fpa)
         vx = vx_prev + ((Fx/mass) * dt)
+        if vx <= 0:
+            vx = 0
         vy = vy_prev + ((Fy/mass) * dt)
         
-        fpa = np.arctan(vy/vx)
+        if vx == 0:
+            fpa = np.radians(90)
+        else:
+            fpa = np.arctan(vy/vx)
         alt = alt_prev - (vy*dt + 0.5*(Fy/mass)*(dt**2))
         vx_prev = vx
         vy_prev = vy
