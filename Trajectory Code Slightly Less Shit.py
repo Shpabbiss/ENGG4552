@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import ambiance
 
 """Initial Conditions"""
 init_alt = 400E3 #[m]
@@ -36,7 +35,14 @@ def g_acc(alt):
     return g
 
 def density(alt):
-    #calculates density at a certain altitude
+    
+    """Calculates density at a certain altitude.
+    params
+    input
+    alt [float] Altitude in m
+    output
+    density in kg/m^3
+    """
     rho = surface_rho*np.exp(-beta*alt)
     return rho
 
@@ -52,7 +58,9 @@ def wackycalcs():
     vy_prev = init_v*np.sin(init_fpa)
     fpa = init_fpa
     alt = init_alt
-    for t in np.linspace(0,time,steps):
+    alt_prev = init_alt
+    v_vals = np.array
+    for i,t in enumerate(np.linspace(0,time,steps)):
 
         rho = density(alt)
         g = g_acc(alt)
@@ -60,9 +68,12 @@ def wackycalcs():
         Fy = mass*g - drag(vy,rho)
         vx = vx_prev + ((Fx/mass) * t)
         vy = vy_prev + ((Fy/mass) * t)
+        v = np.sqrt((vx**2)+(vy**2))
         fpa = np.arctan(vy/vx)
+        alt = alt_prev - vy*t + 0.5*(Fy/mass)*(t**2)
         vx_prev = vx
         vy_prev = vy
+        alt_prev = alt
         
 
 
