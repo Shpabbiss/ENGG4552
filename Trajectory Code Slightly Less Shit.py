@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 """Initial Conditions"""
-init_alt = 150E3 #[m]
+init_alt = 200E3 #[m]
 init_v = 8000    #[m/s]
 init_fpa = np.radians(1) #[radians]
 
@@ -24,7 +24,7 @@ BC = mass/(S*Cd)
 
 """Loop Properties"""
 dt = 0.005 #[s]
-time = 500 #[s]
+time = 420 #[s]
 steps = time/dt + 1
 
 
@@ -63,17 +63,15 @@ def wackycalcs():
     v_vals = np.zeros(int(steps))
     alt_vals = np.zeros(int(steps))
     i = 0
-    print(alt)
-    for t in t_vals:
+    for i,t in enumerate(t_vals):
 
         v = np.sqrt((vx**2)+(vy**2))
         alt_vals[i] = alt
-        #print("alt = {:.2f}".format(alt))
-        #print("v = {:.2f}".format(v))
+        #print("alt =",alt)
+        #print("v = ",v)
         v_vals[i] = v
         rho = density(alt)
         g = g_acc(alt)
-        #print(g)
         dragval = drag(v,rho)
         Fx = -dragval*np.cos(fpa)
         Fy = mass*g - dragval*np.sin(fpa)
@@ -85,17 +83,15 @@ def wackycalcs():
         vx_prev = vx
         vy_prev = vy
         alt_prev = alt
-        print(np.degrees(fpa))
-        #if t > 445:
-          #  print("rho", rho, "dragval", dragval, Fx)
-        
-        i += 1
+        #print(np.degrees(fpa))
         if alt <= 2000:
             print("Parachute Deployed at",alt)
             break 
-        
-        #print(alt)
-        #print(v)
+    return alt_vals,v_vals
+    
+    
+def plotter(alt_vals,v_vals):
+    t_vals = np.linspace(0,time,int(steps))
     plt.plot(t_vals, alt_vals)
     #plt.xlim(440,460)
     plt.show()
@@ -104,7 +100,8 @@ def wackycalcs():
     plt.show()
 
 print(steps)
-wackycalcs()    
+alt_vals,v_vals = wackycalcs()
+plotter(alt_vals,v_vals)
         
 
 
