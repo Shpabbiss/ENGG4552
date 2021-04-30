@@ -51,7 +51,7 @@ def drag(v,rho):
     Fd = 0.5*Cd*(v**2)*rho*S
     return Fd
 
-def wackycalcs():
+def TrajectorySolver():
     t_vals = np.linspace(0,time,int(steps))
     vx = init_v*np.cos(init_fpa)
     vy = init_v*np.sin(init_fpa)
@@ -91,24 +91,26 @@ def wackycalcs():
         vy_prev = vy
         alt_prev = alt
         #print(np.degrees(fpa))
+        tlim = t
         if alt <= 2000:
-            print("Parachute Deployed at",alt)
+            print("Parachute deployed at",round(alt,2), "m and Velocity = ",\
+                  round(v,2),"m/s")
             break 
-    return alt_vals,v_vals
+    return alt_vals,v_vals,tlim
     
     
-def plotter(alt_vals,v_vals):
+def plotter(alt_vals,v_vals,tlim):
     t_vals = np.linspace(0,time,int(steps))
     plt.plot(t_vals, alt_vals)
-    #plt.xlim(440,460)
+    plt.xlim(0,tlim)
     plt.show()
     plt.plot(t_vals, v_vals)
-    #plt.xlim(440,460)
+    plt.xlim(0,tlim)
     plt.show()
 
 print(steps)
-alt_vals,v_vals = wackycalcs()
-plotter(alt_vals,v_vals)
+alt_vals,v_vals,tlim = TrajectorySolver()
+plotter(alt_vals,v_vals,tlim)
         
 
 
