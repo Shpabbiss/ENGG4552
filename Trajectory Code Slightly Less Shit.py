@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 
 """Initial Conditions"""
 init_alt = 200E3 #[m]
+init_disp = 0    #[m]
 init_v = 8000    #[m/s]
 init_fpa = np.radians(1) #[radians]
 
@@ -23,7 +24,7 @@ S = np.pi*noser**2 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 1 #[s]
+dt = 0.005 #[s]
 time = 1000 #[s]
 steps = time/dt + 1
 
@@ -85,10 +86,12 @@ def TrajectorySolver():
     vy = vy_prev = init_v*np.sin(init_fpa)
     fpa = init_fpa
     alt = alt_prev = init_alt
+    disp = disp_prev = init_disp
     
     #initialises arrays
     v_vals = np.zeros(int(steps))
     alt_vals = np.zeros(int(steps))
+    disp_vals = np.zeros(int(steps))
     i = 0
     
     #for loop calculates trajectory
@@ -96,6 +99,7 @@ def TrajectorySolver():
 
         v = np.sqrt((vx**2)+(vy**2)) #Gets total velocity vector
         alt_vals[i] = alt            #Adds altitude val to array
+        disp_vals[i] = disp
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
         g = g_acc(alt)               #Calculates grav acc at this step
@@ -115,18 +119,20 @@ def TrajectorySolver():
             fpa = np.arctan(vy/vx)
         
         alt = alt_prev - (vy*dt + 0.5*(Fy/mass)*(dt**2)) #Calcs new altitude
+        disp = disp_prev + (vx*dt + 0.5*(Fx/mass)*(dt**2)) #Calcs new x disp
         vx_prev = vx   #Sets vx val for next loop
         vy_prev = vy   #Sets vy val for next loop
         alt_prev = alt #Sets alt val for next loop
+        disp_prev = disp
         tlim = t
         if alt <= 2000: #Breaks loop at parachute deployment
             print("Parachute deployed at",round(alt,2), "m and Velocity = ",\
                   round(v,2),"m/s")
             break 
-    return alt_vals,v_vals,tlim
+    return alt_vals,disp_vals,v_vals,tlim
     
     
-def plotter(alt_vals,v_vals,tlim,a_vals):
+def plotter(alt_vals,disp_vals,v_vals,tlim,a_vals):
     
     """Plots Graphs
     params
@@ -142,12 +148,19 @@ def plotter(alt_vals,v_vals,tlim,a_vals):
     
     t_vals = np.linspace(0,time,int(steps))
     
-    #Plot Altitude
+    #Plot Altitude vs Time
     plt.plot(t_vals, alt_vals)
     plt.title("Altitude vs Time")
     plt.xlabel("Time (s)")
     plt.ylabel("Altitude (m)")
     plt.xlim(0,tlim)
+    plt.show()
+    
+    #Plot Altitude vs Displacement over Ground
+    plt.plot(disp_vals/1000,alt_vals/1000)
+    plt.title("Altitude vs Displacement over Ground")
+    plt.xlabel("Ground Displacement (km)")
+    plt.ylabel("Altitude (km)")
     plt.show()
     
     #Plot Velocity
@@ -162,7 +175,7 @@ def plotter(alt_vals,v_vals,tlim,a_vals):
     plt.plot(t_vals,a_vals)
     plt.title("Acceleration vs Time")
     plt.xlabel("Time (s)")
-    plt.ylabel("Acceleration (m/s^2)")
+    plt.ylabel("Acceleration (g's')")
     plt.xlim(0,tlim)
     
     
@@ -182,15 +195,15 @@ def a_vals(v_vals):
             a[i] = 0
         else:
             a[i] = v_vals[i-1] - v_vals[i]
-    a_vals = a/9.81
+    a_vals = a/(9.81*dt)
     return a_vals
 
 
 """Running the Code"""
 print(steps)
-alt_vals,v_vals,tlim = TrajectorySolver()
+alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()
 a_vals = a_vals(v_vals)
-plotter(alt_vals,v_vals,tlim,a_vals)
+plotter(alt_vals,disp_vals,v_vals,tlim,a_vals)
 
 
 
