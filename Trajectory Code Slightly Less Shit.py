@@ -25,7 +25,7 @@ BC = mass/(S*Cd)
 
 """Loop Properties"""
 dt = 0.05 #[s]
-time = 1000 #[s]
+time = 2000 #[s]
 steps = time/dt + 1
 
 
@@ -67,6 +67,20 @@ def drag(v,rho):
     Fd = 0.5*Cd*(v**2)*rho*S
     return Fd
 
+def lift(v,rho):
+    
+    """Calculates lift force at certain flow conditions.
+    params
+    input
+    v [float] velocity in m/s
+    rho [float] density in kg/m^3
+    output
+    lfit force in N
+    """
+    
+    Fl = 0.5*Cl*(v**2)*rho*S
+    return Fl
+
 def TrajectorySolver():
     
     """Calculates Trajectory of Re-Entry Vehicle based on vehicle paramaters.
@@ -103,10 +117,11 @@ def TrajectorySolver():
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
         g = g_acc(alt)               #Calculates grav acc at this step
+        liftval = lift(v,rho)
         dragval = drag(v,rho)        #Calculates Drag at this step
-        Fx = -dragval*np.cos(fpa)    #X Direction Force Calcs
-        Fy = mass*g - dragval*np.sin(fpa) #Y Direction Force Calcs
-        
+        Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa)#X Direction Force Calcs
+        Fy = mass*g - liftval*np.cos(fpa) \
+            - dragval*np.sin(fpa)   #Y Direction Force Calcs
         
         vx = vx_prev + ((Fx/mass) * dt) #Calcs v in x direction
         if vx <= 0:     
@@ -127,7 +142,7 @@ def TrajectorySolver():
         tlim = t
         if alt <= 2000: #Breaks loop at parachute deployment
             print("Parachute deployed at",round(alt,2), "m and Velocity = ",\
-                  round(v,2),"m/s")
+                  round(v,2),"m/s after", t, "seconds of flight time.")
             break 
     return alt_vals,disp_vals,v_vals,tlim
 
@@ -197,15 +212,30 @@ def a_val(v_vals):
     return a_vals
 
 def array_cleaner():
+    
+    """Cleans extra zero values from TrajectorySolver arrays.
+    params
+    input
+    variables at top of code
+    output
+    TrajectorySolver and Acc arrays pruned of excess end values.
+    """
+    
     t_vals = np.linspace(0,time,int(steps))
     alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()   
     a_vals = a_val(v_vals)
     i = 0
     check = 0
+    
+
     for i in range(int(steps)):
+        
+        #If the parachute hasn't deployed, do nothing and go to next timestep
         if i <= (tlim/dt): 
             check += 1    
             continue
+        
+        #If parachute has deployed, delete unnecessary values
         else:
             alt_vals = np.delete(alt_vals,check)
             disp_vals = np.delete(disp_vals,check)
