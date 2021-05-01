@@ -202,9 +202,7 @@ def array_cleaner():
     alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()   
     a_vals = a_val(v_vals)
     for i in range(int(steps)):
-        if i <= tlim:
-            continue
-        if i == int(steps):
+        if i <= tlim: #CHANGE TLIM TO ITS INDEX VAL NOT TIME VAL
             continue
         else:
             alt_vals = np.delete(alt_vals,i)
