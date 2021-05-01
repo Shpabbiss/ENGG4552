@@ -29,8 +29,14 @@ steps = time/dt + 1
 
 
 def g_acc(alt): 
-    #This function calculates the acceleration due to gravity at the
-    #specified altitude
+    
+    """Calculates acceleration due to gravity at a certain altitude.
+    params
+    input
+    alt [float] Altitude in m
+    output
+    acceleration in m/s^2
+    """
     g = (G*Me)/((Re + alt)**2)
     return g
 
@@ -47,12 +53,34 @@ def density(alt):
     return rho
 
 def drag(v,rho):
-    #calculates drag based upon flow conditions
+    
+    """Calculates drag force at certain flow conditions.
+    params
+    input
+    v [float] velocity in m/s
+    rho [float] density in kg/m^3
+    output
+    drag force in N
+    """
+    
     Fd = 0.5*Cd*(v**2)*rho*S
     return Fd
 
 def TrajectorySolver():
+    
+    """Calculates Trajectory of Re-Entry Vehicle based on vehicle paramaters.
+    params
+    input
+    variables at top of code
+    output
+    altitude array in m
+    velocity array in m/s
+    time at which parachute deployed in s
+    """
+    
     t_vals = np.linspace(0,time,int(steps))
+    
+    #sets up required values for loop with initial parameters
     vx = init_v*np.cos(init_fpa)
     vy = init_v*np.sin(init_fpa)
     vx_prev = init_v*np.cos(init_fpa)
@@ -60,57 +88,114 @@ def TrajectorySolver():
     fpa = init_fpa
     alt = init_alt
     alt_prev = init_alt
+    
+    #initialises arrays
     v_vals = np.zeros(int(steps))
     alt_vals = np.zeros(int(steps))
     i = 0
+    
+    #for loop calculates trajectory
     for i,t in enumerate(t_vals):
 
-        v = np.sqrt((vx**2)+(vy**2))
-        alt_vals[i] = alt
-        if t > 485 and t < 486:
-            print("t =",t,"alt =",alt,"v = ",v, "fpa = ,",fpa)
-        #print("v = ",v)
-        #print("t =",t)
-        v_vals[i] = v
-        rho = density(alt)
-        g = g_acc(alt)
-        dragval = drag(v,rho)
-        Fx = -dragval*np.cos(fpa)
-        Fy = mass*g - dragval*np.sin(fpa)
-        vx = vx_prev + ((Fx/mass) * dt)
-        if vx <= 0:
-            vx = 0
-        vy = vy_prev + ((Fy/mass) * dt)
+        v = np.sqrt((vx**2)+(vy**2)) #Gets total velocity vector
+        alt_vals[i] = alt            #Adds altitude val to array
+        v_vals[i] = v                #Adds velocity val to array
+        rho = density(alt)           #Calculates density at this step
+        g = g_acc(alt)               #Calculates grav acc at this step
+        dragval = drag(v,rho)        #Calculates Drag at this step
+        Fx = -dragval*np.cos(fpa)    #X Direction Force Calcs
+        Fy = mass*g - dragval*np.sin(fpa) #Y Direction Force Calcs
         
-        if vx == 0:
+        
+        vx = vx_prev + ((Fx/mass) * dt) #Calcs v in x direction
+        if vx <= 0:     
+            vx = 0
+        
+        vy = vy_prev + ((Fy/mass) * dt) #Calcs v in y direction
+        
+        if vx == 0:         #Calcs new flight path angle based on vx and vy
             fpa = np.radians(90)
         else:
             fpa = np.arctan(vy/vx)
-        alt = alt_prev - (vy*dt + 0.5*(Fy/mass)*(dt**2))
-        vx_prev = vx
-        vy_prev = vy
-        alt_prev = alt
-        #print(np.degrees(fpa))
+        
+        
+        alt = alt_prev - (vy*dt + 0.5*(Fy/mass)*(dt**2)) #Calcs new altitude
+        vx_prev = vx   #Sets vx val for next loop
+        vy_prev = vy   #Sets vy val for next loop
+        alt_prev = alt #Sets alt val for next loop
         tlim = t
-        if alt <= 2000:
+        if alt <= 2000: #Breaks loop at parachute deployment
             print("Parachute deployed at",round(alt,2), "m and Velocity = ",\
                   round(v,2),"m/s")
             break 
     return alt_vals,v_vals,tlim
     
     
-def plotter(alt_vals,v_vals,tlim):
+def plotter(alt_vals,v_vals,tlim,a_vals):
+    
+    """Plots Graphs
+    params
+    input
+    alt_vals array [floats] Altitude in m
+    v_vals array [floats] velocity in m/s
+    tlim [float] Parachute deployment time in s
+    a_vals array [floats] acceleration in g's'
+    
+    output
+    Altitude, Velocity, Acceleration vs Time
+    """
+    
     t_vals = np.linspace(0,time,int(steps))
+    
+    #Plot Altitude
     plt.plot(t_vals, alt_vals)
+    plt.title("Altitude vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Altitude (m)")
     plt.xlim(0,tlim)
     plt.show()
+    
+    #Plot Velocity
     plt.plot(t_vals, v_vals)
+    plt.title("Velocity vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Velocity (m/s)")
     plt.xlim(0,tlim)
     plt.show()
+    
+    #Plot Decceleration
+    plt.plot(t_vals,a_vals)
+    plt.title("Acceleration vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Acceleration (m/s^2)")
+    plt.xlim(0,tlim)
+    
+    
+def a_vals(v_vals):
+    
+    """Produces acceleration array based on velocity array.
+    params
+    input
+    v_vals array [floats] velocity in m/s
+    output
+    Acceleration array in g's'
+    """
+    
+    a = np.zeros(int(steps))
+    for i in range(int(steps)):
+        if i == 0:
+            a[i] = 0
+        else:
+            a[i] = v_vals[i-1] - v_vals[i]
+    a_vals = a/9.81
+    return a_vals
 
+
+"""Running the Code"""
 print(steps)
 alt_vals,v_vals,tlim = TrajectorySolver()
-plotter(alt_vals,v_vals,tlim)
-        
+a_vals = a_vals(v_vals)
+plotter(alt_vals,v_vals,tlim,a_vals)
+
 
 
