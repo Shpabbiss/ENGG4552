@@ -24,7 +24,7 @@ S = np.pi*noser**2 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 0.5 #[s]
+dt = 0.05 #[s]
 time = 1000 #[s]
 steps = time/dt + 1
 
@@ -131,7 +131,7 @@ def TrajectorySolver():
             break 
     return alt_vals,disp_vals,v_vals,tlim
 
-def plotter(alt_vals,disp_vals,v_vals,a_vals):
+def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
     
     """Plots Graphs
     params
@@ -144,8 +144,6 @@ def plotter(alt_vals,disp_vals,v_vals,a_vals):
     output
     Altitude, Velocity, Acceleration vs Time
     """
-    
-    t_vals = np.linspace(0,time,int(steps))
     
     #Plot Altitude vs Time
     plt.plot(t_vals, alt_vals)
@@ -199,22 +197,28 @@ def a_val(v_vals):
     return a_vals
 
 def array_cleaner():
+    t_vals = np.linspace(0,time,int(steps))
     alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()   
     a_vals = a_val(v_vals)
+    i = 0
+    check = 0
     for i in range(int(steps)):
-        if i <= tlim: #CHANGE TLIM TO ITS INDEX VAL NOT TIME VAL
+        if i <= (tlim/dt): 
+            check += 1    
             continue
         else:
-            alt_vals = np.delete(alt_vals,i)
-            disp_vals = np.delete(disp_vals,i)
-            v_vals = np.delete(v_vals,i)
-            a_vals = np.delete(a_vals,i)
-    return alt_vals, disp_vals,v_vals,a_val
+            alt_vals = np.delete(alt_vals,check)
+            disp_vals = np.delete(disp_vals,check)
+            v_vals = np.delete(v_vals,check)
+            a_vals = np.delete(a_vals,check)
+            t_vals = np.delete(t_vals,check)
+        
+    return alt_vals, disp_vals,v_vals,a_vals,t_vals
 
 """Running the Code"""
 print(steps)
-alt_vals,disp_vals,v_vals,a_vals = array_cleaner()
-plotter(alt_vals,disp_vals,v_vals,a_vals)
+alt_vals,disp_vals,v_vals,a_vals,t_vals = array_cleaner()
+plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
 
 
 
