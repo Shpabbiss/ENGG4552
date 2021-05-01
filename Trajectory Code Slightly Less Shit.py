@@ -81,13 +81,10 @@ def TrajectorySolver():
     t_vals = np.linspace(0,time,int(steps))
     
     #sets up required values for loop with initial parameters
-    vx = init_v*np.cos(init_fpa)
-    vy = init_v*np.sin(init_fpa)
-    vx_prev = init_v*np.cos(init_fpa)
-    vy_prev = init_v*np.sin(init_fpa)
+    vx = vx_prev = init_v*np.cos(init_fpa)
+    vy = vy_prev = init_v*np.sin(init_fpa)
     fpa = init_fpa
-    alt = init_alt
-    alt_prev = init_alt
+    alt = alt_prev = init_alt
     
     #initialises arrays
     v_vals = np.zeros(int(steps))
@@ -110,14 +107,12 @@ def TrajectorySolver():
         vx = vx_prev + ((Fx/mass) * dt) #Calcs v in x direction
         if vx <= 0:     
             vx = 0
-        
         vy = vy_prev + ((Fy/mass) * dt) #Calcs v in y direction
         
         if vx == 0:         #Calcs new flight path angle based on vx and vy
             fpa = np.radians(90)
         else:
             fpa = np.arctan(vy/vx)
-        
         
         alt = alt_prev - (vy*dt + 0.5*(Fy/mass)*(dt**2)) #Calcs new altitude
         vx_prev = vx   #Sets vx val for next loop
