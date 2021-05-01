@@ -24,7 +24,7 @@ S = np.pi*noser**2 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 0.005 #[s]
+dt = 0.5 #[s]
 time = 1000 #[s]
 steps = time/dt + 1
 
@@ -130,9 +130,8 @@ def TrajectorySolver():
                   round(v,2),"m/s")
             break 
     return alt_vals,disp_vals,v_vals,tlim
-    
-    
-def plotter(alt_vals,disp_vals,v_vals,tlim,a_vals):
+
+def plotter(alt_vals,disp_vals,v_vals,a_vals):
     
     """Plots Graphs
     params
@@ -153,7 +152,7 @@ def plotter(alt_vals,disp_vals,v_vals,tlim,a_vals):
     plt.title("Altitude vs Time")
     plt.xlabel("Time (s)")
     plt.ylabel("Altitude (m)")
-    plt.xlim(0,tlim)
+    #plt.xlim(0,tlim)
     plt.show()
     
     #Plot Altitude vs Displacement over Ground
@@ -168,18 +167,19 @@ def plotter(alt_vals,disp_vals,v_vals,tlim,a_vals):
     plt.title("Velocity vs Time")
     plt.xlabel("Time (s)")
     plt.ylabel("Velocity (m/s)")
-    plt.xlim(0,tlim)
+    #plt.xlim(0,tlim)
     plt.show()
     
     #Plot Decceleration
     plt.plot(t_vals,a_vals)
     plt.title("Acceleration vs Time")
     plt.xlabel("Time (s)")
-    plt.ylabel("Acceleration (g's')")
-    plt.xlim(0,tlim)
+    plt.ylabel("Acceleration (g's)")
+    #plt.xlim(0,tlim)
+    plt.show()
     
     
-def a_vals(v_vals):
+def a_val(v_vals):
     
     """Produces acceleration array based on velocity array.
     params
@@ -198,12 +198,25 @@ def a_vals(v_vals):
     a_vals = a/(9.81*dt)
     return a_vals
 
+def array_cleaner():
+    alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()   
+    a_vals = a_val(v_vals)
+    for i in range(int(steps)):
+        if i <= tlim:
+            continue
+        if i == int(steps):
+            continue
+        else:
+            alt_vals = np.delete(alt_vals,i)
+            disp_vals = np.delete(disp_vals,i)
+            v_vals = np.delete(v_vals,i)
+            a_vals = np.delete(a_vals,i)
+    return alt_vals, disp_vals,v_vals,a_val
 
 """Running the Code"""
 print(steps)
-alt_vals,disp_vals,v_vals,tlim = TrajectorySolver()
-a_vals = a_vals(v_vals)
-plotter(alt_vals,disp_vals,v_vals,tlim,a_vals)
+alt_vals,disp_vals,v_vals,a_vals = array_cleaner()
+plotter(alt_vals,disp_vals,v_vals,a_vals)
 
 
 
