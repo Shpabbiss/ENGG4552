@@ -185,9 +185,9 @@ def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
     
     #Plot Decceleration
     plt.plot(t_vals,a_vals)
-    plt.title("Acceleration vs Time")
+    plt.title("Deceleration vs Time")
     plt.xlabel("Time (s)")
-    plt.ylabel("Acceleration (g's)")
+    plt.ylabel("Deceleration (g's)")
     #plt.xlim(0,tlim)
     plt.show()
     
