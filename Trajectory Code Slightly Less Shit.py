@@ -146,7 +146,13 @@ def TrajectorySolver():
             break 
     return alt_vals,disp_vals,v_vals,tlim
 
-def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
+def density_array(alt_vals):
+    rho_vals = np.zeros(len(alt_vals))
+    for i,alt in enumerate(alt_vals):
+        rho_vals[i] = density(alt)
+    return rho_vals
+
+def plotter(t_vals,alt_vals,disp_vals,rho_vals,v_vals,a_vals):
     
     """Plots Graphs
     params
@@ -173,6 +179,13 @@ def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
     plt.title("Altitude vs Displacement over Ground")
     plt.xlabel("Ground Displacement (km)")
     plt.ylabel("Altitude (km)")
+    plt.show()
+    
+    #Plot Density vs Time
+    plt.plot(t_vals,rho_vals)
+    plt.title("Density vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Density (kg/m^3)")
     plt.show()
     
     #Plot Velocity
@@ -242,13 +255,16 @@ def array_cleaner():
             v_vals = np.delete(v_vals,check)
             a_vals = np.delete(a_vals,check)
             t_vals = np.delete(t_vals,check)
+    
+    rho_vals = density(alt_vals) #creates density array for cliff
         
-    return alt_vals,disp_vals,v_vals,a_vals,t_vals
+    return alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals
 
 """Running the Code"""
 print(steps)
-alt_vals,disp_vals,v_vals,a_vals,t_vals = array_cleaner()
-plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals = array_cleaner()
+plotter(t_vals,alt_vals,disp_vals,rho_vals,v_vals,a_vals)
+
 
 
 
