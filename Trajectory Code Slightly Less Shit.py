@@ -146,12 +146,6 @@ def TrajectorySolver():
             break 
     return alt_vals,disp_vals,v_vals,tlim
 
-def density_array(alt_vals):
-    rho_vals = np.zeros(len(alt_vals))
-    for i,alt in enumerate(alt_vals):
-        rho_vals[i] = density(alt)
-    return rho_vals
-
 def plotter(t_vals,alt_vals,disp_vals,rho_vals,v_vals,a_vals):
     
     """Plots Graphs
