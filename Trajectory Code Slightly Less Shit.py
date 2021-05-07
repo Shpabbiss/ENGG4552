@@ -243,7 +243,7 @@ def array_cleaner():
             a_vals = np.delete(a_vals,check)
             t_vals = np.delete(t_vals,check)
         
-    return alt_vals, disp_vals,v_vals,a_vals,t_vals
+    return alt_vals,disp_vals,v_vals,a_vals,t_vals
 
 """Running the Code"""
 print(steps)
