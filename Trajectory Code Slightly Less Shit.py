@@ -241,7 +241,9 @@ def array_cleaner(gamma):
             a_vals = np.delete(a_vals,check)
             t_vals = np.delete(t_vals,check)
         
-    return alt_vals, disp_vals,v_vals,a_vals,t_vals,gamma
+    rho_vals = density(alt_vals) #creates density array for cliff
+        
+    return alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma
 
 def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
                      disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
@@ -272,9 +274,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Altitude vs Displacement over Ground
     plt.plot(disp_vals/1E3, alt_vals/1E3,label="Initial FPA = "+str(gamma))
-    plt.plot(t_vals1/1E3, alt_vals1/1E3,label="Initial FPA = " + str(gamma1))
-    plt.plot(t_vals2/1E3, alt_vals2/1E3,label="Initial FPA = " + str(gamma2))
-    plt.plot(t_vals3/1E3, alt_vals3/1E3,label="Initial FPA = " + str(gamma3))
+    plt.plot(disp_vals1/1E3, alt_vals1/1E3,label="Initial FPA = "+str(gamma1))
+    plt.plot(disp_vals2/1E3, alt_vals2/1E3,label="Initial FPA = "+str(gamma2))
+    plt.plot(disp_vals3/1E3, alt_vals3/1E3,label="Initial FPA = "+str(gamma3))
     plt.title("Altitude vs Displacement over Ground")
     plt.legend()
     plt.xlabel("Ground Displacement (km)")
@@ -308,23 +310,23 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     plt.plot(alt_vals1/1E3, a_vals1,label="Initial FPA = " + str(gamma1))
     plt.plot(alt_vals2/1E3, a_vals2,label="Initial FPA = " + str(gamma2))
     plt.plot(alt_vals3/1E3, a_vals3,label="Initial FPA = " + str(gamma3))
-    plt.title("Acceleration vs Altitude")
+    plt.title("Decceleration vs Altitude")
     plt.legend()
     plt.xlabel("Altitude (km)")
-    plt.ylabel("Acceleration (g's)")
+    plt.ylabel("Decceleration (g's)")
     plt.show()
 
 
 """Running the Code"""
 print(steps)
-alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma = array_cleaner(0)
-alt_vals1,disp_vals1,v_vals1,a_vals1,t_vals1,gamma1 = array_cleaner(5)
-alt_vals2,disp_vals2,v_vals2,a_vals2,t_vals2,gamma2 = array_cleaner(10)
-alt_vals3,disp_vals3,v_vals3,a_vals3,t_vals3,gamma3 = array_cleaner(15)
+alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma=array_cleaner(0)
+alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
+alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
+alt_vals3,disp_vals3,rho_vals3,v_vals3,a_vals3,t_vals3,gamma3=array_cleaner(15)
 #plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
 plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
-                     disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
-                         disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
-                             disp_vals3,v_vals3,a_vals3,t_vals3,gamma3)
+                      disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
+                          disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
+                              disp_vals3,v_vals3,a_vals3,t_vals3,gamma3)
 
 
