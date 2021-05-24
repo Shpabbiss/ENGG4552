@@ -27,7 +27,7 @@ US_atmo_heights = [0,3,5,7,10,15,25,50,80] #Corresponding altitudes
 
 
 """Vehicle Properties"""
-r = 1.5
+r = 0.3
 mass = 10      #[kg]
 Cd = 1          #Coefficient of Drag
 Cl = 0          #Coefficient of Lift
