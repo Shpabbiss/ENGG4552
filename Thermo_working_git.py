@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 """Initial Conditions"""
-init_alt = 200E3            #[m]
+init_alt = 300E3            #[m]
 init_disp = 0               #[m]
 init_v = 8000               #[m/s]
 init_fpa = np.radians(1)    #[radians]
