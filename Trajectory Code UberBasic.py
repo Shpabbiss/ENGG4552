@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 """Initial Conditions"""
 init_altitude = 400*10**3 #[m]
 init_v = 8000    #[m/s]
-gamma = np.radians(12)               #[degrees]
+gamma = np.radians(5)               #[degrees]
 
 
 """Constants"""
@@ -27,13 +27,13 @@ US_atmo_heights = [0,3,5,7,10,15,25,50,80] #Corresponding altitudes
 
 
 """Vehicle Properties"""
-r = 0.3
-mass = 10      #[kg]
+r = 0.1
+mass = 1000      #[kg]
 Cd = 1          #Coefficient of Drag
 Cl = 0          #Coefficient of Lift
 Cfavg = 0.02         #Body Averaged Skin Friction Coefficient (PLACEHOLDER 
 # UNTIL CFD- value taken from 4800 powerpoint)         
-S = np.pi*r**2           #[m^2] Reference Area - Based on CAD model
+S =50.3         #[m^2] Reference Area - Based on CAD model
 Sw = S          #[m^2] Whole Exposed Surface - Based on CAD model
 BC = mass/(S*Cd) #Ballistic Coefficient 
 

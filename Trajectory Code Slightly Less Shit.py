@@ -18,7 +18,7 @@ surface_rho = 1.225 #[kg/m^3]
 """Vehicle Properties"""
 mass = 10        #[kg]
 noser = 0.3      #[m]
-Cd = 1
+Cd = 1.4
 Cl = 0
 S = 0.05106375 #[m^2] - Reference Area
 BC = mass/(S*Cd)
