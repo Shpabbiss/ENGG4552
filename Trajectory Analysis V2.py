@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 """Initial Conditions"""
-init_alt = 300E3 #[m]
+init_alt = 200E3 #[m]
 init_disp = 0    #[m]
-init_v = 8000    #[m/s]
+init_v = 7800    #[m/s]
 #init_fpa = np.radians(0) #[radians]
 
 """Constants"""
@@ -24,8 +24,8 @@ S = 0.05106375 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 0.05 #[s]
-time = 2000 #[s]
+dt = 1 #[s]
+time = 204000 #[s]
 steps = time/dt + 1
 
 
@@ -40,6 +40,15 @@ def g_acc(alt):
     """
     g = (G*Me)/((Re + alt)**2)
     return g
+
+def g_mod(v):
+    if v >= 7800:
+        g_mod = 0
+    else:
+        g_mod = (7800 - v)/7800
+    return g_mod
+    
+        
 
 def density(alt):
     
@@ -114,11 +123,15 @@ def TrajectorySolver(gamma):
     for i,t in enumerate(t_vals):
 
         v = np.sqrt((vx**2)+(vy**2)) #Gets total velocity vector
+        #print(v)
+        #print(alt)
         alt_vals[i] = alt            #Adds altitude val to array
         disp_vals[i] = disp
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
-        g = g_acc(alt)               #Calculates grav acc at this step
+        ga = g_acc(alt)               #Calculates grav acc at this step
+        gm = g_mod(v)
+        g = ga * gm
         liftval = lift(v,rho)
         dragval = drag(v,rho)        #Calculates Drag at this step
         Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa)#X Direction Force Calcs
@@ -263,9 +276,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Altitude vs Time
     plt.plot(t_vals, alt_vals,label="Initial FPA = "+str(gamma))
-    plt.plot(t_vals1, alt_vals1,label="Initial FPA = " + str(gamma1))
-    plt.plot(t_vals2, alt_vals2,label="Initial FPA = " + str(gamma2))
-    plt.plot(t_vals3, alt_vals3,label="Initial FPA = " + str(gamma3))
+    #plt.plot(t_vals1, alt_vals1,label="Initial FPA = " + str(gamma1))
+    #plt.plot(t_vals2, alt_vals2,label="Initial FPA = " + str(gamma2))
+    #plt.plot(t_vals3, alt_vals3,label="Initial FPA = " + str(gamma3))
     plt.title("Altitude vs Time")
     plt.legend()
     plt.xlabel("Time (s)")
@@ -274,9 +287,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Altitude vs Displacement over Ground
     plt.plot(disp_vals/1E3, alt_vals/1E3,label="Initial FPA = "+str(gamma))
-    plt.plot(disp_vals1/1E3, alt_vals1/1E3,label="Initial FPA = "+str(gamma1))
-    plt.plot(disp_vals2/1E3, alt_vals2/1E3,label="Initial FPA = "+str(gamma2))
-    plt.plot(disp_vals3/1E3, alt_vals3/1E3,label="Initial FPA = "+str(gamma3))
+    #plt.plot(disp_vals1/1E3, alt_vals1/1E3,label="Initial FPA = "+str(gamma1))
+    #plt.plot(disp_vals2/1E3, alt_vals2/1E3,label="Initial FPA = "+str(gamma2))
+    #plt.plot(disp_vals3/1E3, alt_vals3/1E3,label="Initial FPA = "+str(gamma3))
     plt.title("Altitude vs Displacement over Ground")
     plt.legend()
     plt.xlabel("Ground Displacement (km)")
@@ -285,9 +298,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Velocity
     plt.plot(t_vals, v_vals,label="Initial FPA = "+str(gamma))
-    plt.plot(t_vals1, v_vals1,label="Initial FPA = " + str(gamma1))
-    plt.plot(t_vals2, v_vals2,label="Initial FPA = " + str(gamma2))
-    plt.plot(t_vals3, v_vals3,label="Initial FPA = " + str(gamma3))
+    #plt.plot(t_vals1, v_vals1,label="Initial FPA = " + str(gamma1))
+    #plt.plot(t_vals2, v_vals2,label="Initial FPA = " + str(gamma2))
+    #plt.plot(t_vals3, v_vals3,label="Initial FPA = " + str(gamma3))
     plt.title("Velocity vs Time")
     plt.legend()
     plt.xlabel("Time (s)")
@@ -296,9 +309,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Decceleration
     plt.plot(t_vals, a_vals,label="Initial FPA = "+str(gamma))
-    plt.plot(t_vals1, a_vals1,label="Initial FPA = " + str(gamma1))
-    plt.plot(t_vals2, a_vals2,label="Initial FPA = " + str(gamma2))
-    plt.plot(t_vals3, a_vals3,label="Initial FPA = " + str(gamma3))
+    #plt.plot(t_vals1, a_vals1,label="Initial FPA = " + str(gamma1))
+    #plt.plot(t_vals2, a_vals2,label="Initial FPA = " + str(gamma2))
+    #plt.plot(t_vals3, a_vals3,label="Initial FPA = " + str(gamma3))
     plt.title("Deceleration vs Time")
     plt.legend()
     plt.xlabel("Time (s)")
@@ -307,9 +320,9 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     
     #Plot Decceleration vs Altitude
     plt.plot(alt_vals/1E3, a_vals,label="Initial FPA = "+str(gamma))
-    plt.plot(alt_vals1/1E3, a_vals1,label="Initial FPA = " + str(gamma1))
-    plt.plot(alt_vals2/1E3, a_vals2,label="Initial FPA = " + str(gamma2))
-    plt.plot(alt_vals3/1E3, a_vals3,label="Initial FPA = " + str(gamma3))
+    #plt.plot(alt_vals1/1E3, a_vals1,label="Initial FPA = " + str(gamma1))
+    #plt.plot(alt_vals2/1E3, a_vals2,label="Initial FPA = " + str(gamma2))
+    #plt.plot(alt_vals3/1E3, a_vals3,label="Initial FPA = " + str(gamma3))
     plt.title("Decceleration vs Altitude")
     plt.legend()
     plt.xlabel("Altitude (km)")
@@ -320,13 +333,13 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
 """Running the Code"""
 print(steps)
 alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma=array_cleaner(0)
-alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
-alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
-alt_vals3,disp_vals3,rho_vals3,v_vals3,a_vals3,t_vals3,gamma3=array_cleaner(15)
-#plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
-plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
-                      disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
-                          disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
-                              disp_vals3,v_vals3,a_vals3,t_vals3,gamma3)
+#alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
+#alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
+#alt_vals3,disp_vals3,rho_vals3,v_vals3,a_vals3,t_vals3,gamma3=array_cleaner(15)
+plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+#plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
+                      #disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
+                       #   disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
+                        #      disp_vals3,v_vals3,a_vals3,t_vals3,gamma3)
 
 
