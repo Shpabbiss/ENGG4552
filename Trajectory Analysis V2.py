@@ -18,13 +18,13 @@ surface_rho = 1.225 #[kg/m^3]
 """Vehicle Properties"""
 mass = 10        #[kg]
 noser = 0.3      #[m]
-Cd = 1.4
+#Cd = 1.4
 Cl = 0
 S = 0.05106375 #[m^2] - Reference Area
 BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 1 #[s]
+dt = 2 #[s]
 time = 204000 #[s]
 steps = time/dt + 1
 
@@ -62,7 +62,7 @@ def density(alt):
     rho = surface_rho*np.exp(-beta*alt)
     return rho
 
-def drag(v,rho):
+def drag(v,rho,Cd):
     
     """Calculates drag force at certain flow conditions.
     params
@@ -89,6 +89,25 @@ def lift(v,rho):
     
     Fl = 0.5*Cl*(v**2)*rho*S
     return Fl
+
+def amb_temp(h):
+    if h < 11000:
+        T = (15) - (6.5/1000)*h
+    elif h < 25000:
+        T = -56.5
+    elif h < 50000:
+        T = (-56.5) + (2.16/1000)*(h-25000)
+    elif h < 75000:
+        T = (-2.5) - (3.6/1000)*(h-50000)
+    else:
+        T = -92.5
+    return T
+
+def Mach(v,h):
+    a = np.sqrt(1.4*287*(amb_temp(h)+273.15))
+    M = v/a
+    return M
+
 
 def TrajectorySolver(gamma):
     
@@ -132,8 +151,14 @@ def TrajectorySolver(gamma):
         ga = g_acc(alt)               #Calculates grav acc at this step
         gm = g_mod(v)
         g = ga * gm
+        
+        if Mach(v,alt) >= 13:
+            Cd = 1.3
+        elif Mach(v,alt) < 13:
+            Cd = 1.45
+        
         liftval = lift(v,rho)
-        dragval = drag(v,rho)        #Calculates Drag at this step
+        dragval = drag(v,rho,Cd)        #Calculates Drag at this step
         Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa)#X Direction Force Calcs
         Fy = mass*g - liftval*np.cos(fpa) \
             - dragval*np.sin(fpa)   #Y Direction Force Calcs
