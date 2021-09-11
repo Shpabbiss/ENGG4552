@@ -18,10 +18,10 @@ surface_rho = 1.225 #[kg/m^3]
 """Vehicle Properties"""
 mass = 10        #[kg]
 noser = 0.3      #[m]
-#Cd = 1.4
+Cd = 1.4
 Cl = 0
 S = 0.05106375 #[m^2] - Reference Area
-BC = mass/(S*Cd)
+#BC = mass/(S*Cd)
 
 """Loop Properties"""
 dt = 2 #[s]
@@ -152,10 +152,10 @@ def TrajectorySolver(gamma):
         gm = g_mod(v)
         g = ga * gm
         
-        if Mach(v,alt) >= 13:
-            Cd = 1.3
-        elif Mach(v,alt) < 13:
-            Cd = 1.45
+        # if Mach(v,alt) >= 13:
+        #     Cd = 1.3
+        # elif Mach(v,alt) < 13:
+        #     Cd = 1.45
         
         liftval = lift(v,rho)
         dragval = drag(v,rho,Cd)        #Calculates Drag at this step
