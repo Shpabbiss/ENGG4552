@@ -107,8 +107,7 @@ def g_mod(v):
     else:
         g_mod = (7800 - v)/7800
     return g_mod
-    
-        
+            
 
 def density(alt):
     
