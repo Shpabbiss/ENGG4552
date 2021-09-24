@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 
 
 """Initial Conditions"""
-init_altitude = 400*10**3 #[m]
-init_v = 8000    #[m/s]
-gamma = np.radians(5)               #[degrees]
+init_altitude = 100*10**3 #[m]
+init_v = 11700    #[m/s]
+gamma = np.radians(12)               #[degrees]
 
 
 """Constants"""
@@ -28,12 +28,12 @@ US_atmo_heights = [0,3,5,7,10,15,25,50,80] #Corresponding altitudes
 
 """Vehicle Properties"""
 r = 0.1
-mass = 1000      #[kg]
+mass = 18      #[kg]
 Cd = 1          #Coefficient of Drag
 Cl = 0          #Coefficient of Lift
 Cfavg = 0.02         #Body Averaged Skin Friction Coefficient (PLACEHOLDER 
 # UNTIL CFD- value taken from 4800 powerpoint)         
-S =50.3         #[m^2] Reference Area - Based on CAD model
+S =0.125         #[m^2] Reference Area - Based on CAD model
 Sw = S          #[m^2] Whole Exposed Surface - Based on CAD model
 BC = mass/(S*Cd) #Ballistic Coefficient 
 
@@ -101,12 +101,12 @@ def heat_flux_plot(q1,q2,init_alt):
     #This Works its just the same line on the graph - wack
     x_vals = np.linspace(0,init_alt,init_alt+1)
     fig,ax = plt.subplots()
-    ax.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
-    ax.set_xlabel("Altitude (km)")
-    ax.set_ylabel("Heat Flux (J/s) - Lit Review")
-    ax2 = ax.twinx()
-    ax2.plot(x_vals/1000,q2,color='blue',label='AERO4800 Formula')
-    ax2.set_ylabel("Heat Flux (J/s) - AERO4800")
+    #ax.plot(x_vals/1000,q1,color='red',label='Lit Review Formula')
+    #ax.set_xlabel("Altitude (km)")
+    #ax.set_ylabel("Heat Flux (J/s) - Lit Review")
+    #ax2 = ax.twinx()
+    ax.plot(x_vals/1000,q2*10**-6,color='blue',label='AERO4800 Formula')
+    ax.set_ylabel("Heat Flux (MW/m^2) - AERO4800")
     plt.title("Heat Flux vs Altitude")
     #plt.legend()
     plt.show()
@@ -147,13 +147,16 @@ a_vals = deceleration(Graphing_Altitude)
 q_vals1,q_vals2 = heat_flux(Graphing_Altitude,v_vals,rho_vals)
 vs_altitude_plot(v_vals,a_vals,Graphing_Altitude)
 heat_flux_plot(q_vals1,q_vals2,Graphing_Altitude)
+amax = np.max(a_vals)
+ai = np.argmax(a_vals)
 Qtot = total_heat()
 qmax = np.amax(q_vals2)
-qat = np.where(q_vals2 == np.amax(q_vals2))
+qat = np.argmax(q_vals2)#np.where(q_vals2 == np.amax(q_vals2))
 alt_vals = np.linspace(0,Graphing_Altitude,Graphing_Altitude+1)
-print("Total heat load absorbed =",round(Qtot*10**-6,3),"MJ/kg")
-print('Maximum heat flux is',round(qmax*10**-9,3),'MJ/s at',\
-      round(float(alt_vals[qat]*(1/1000)),3),"km")
-
+#print("Total heat load absorbed =",round(Qtot*10**-6,3),"MJ/kg")
+print('Maximum heat flux is',round(qmax*10**-6,3),'MW/m^2 at',\
+      round(float(alt_vals[qat]*(1/1000)),3),"km and",round(v_vals[qat],3),"m/s.")
+print('Maximum deceleration is',round(amax,3),'gs at',\
+      round(float(alt_vals[ai]*(1/1000)),3),"km and",round(v_vals[ai],3),"m/s.")
 
     
