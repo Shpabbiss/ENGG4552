@@ -129,7 +129,7 @@ def vs_altitude_plot(v_vals,a_vals,init_alt):
     ax2 = ax.twinx()
     ax2.plot((x_vals/1000),a_vals,color="red")
     ax2.set_ylabel("Deceleration (g's)",color = "red")
-    plt.title("Spacecraft Velocity vs Altitude")
+    plt.title("Spacecraft Velocity and Deceleration vs Altitude")
     plt.show()
     
 def total_heat():
