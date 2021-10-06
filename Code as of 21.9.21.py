@@ -180,6 +180,13 @@ def g_acc(alt):
     g = (G*Me)/((Re + alt)**2)
     return g
 
+def g_mod(v):
+    if v >= 7800:
+        g_mod = 0
+    else:
+        g_mod = (7800 - v)/7800
+    return g_mod
+
 def density(alt):
     
     """Calculates density at a certain altitude.
@@ -257,7 +264,9 @@ def TrajectorySolver(gamma):
         disp_vals[i] = disp
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
-        g = g_acc(alt)               #Calculates grav acc at this step
+        ga = g_acc(alt)               #Calculates grav acc at this step
+        gm = g_mod(v)
+        g = ga * gm
         liftval = lift(v,rho)
         dragval = drag(v,rho)        #Calculates Drag at this step
         Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa)#X Direction Force Calcs

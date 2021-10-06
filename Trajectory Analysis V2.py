@@ -16,16 +16,16 @@ beta = 1/y0
 surface_rho = 1.225 #[kg/m^3]
 
 """Vehicle Properties"""
-mass = 10        #[kg]
-noser = 0.3      #[m]
+mass = 9.12034233787726        #[kg]
+noser = 0.07927      #[m]
 Cd = 1.4
 Cl = 0
 S = 0.05106375 #[m^2] - Reference Area
 #BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 2 #[s]
-time = 204000 #[s]
+dt = 0.05 #[s]
+time = 2000 #[s]
 steps = time/dt + 1
 
 
