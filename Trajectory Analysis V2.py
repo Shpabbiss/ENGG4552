@@ -379,6 +379,15 @@ alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma,M_vals=array_cleaner(10)
 i = np.argmax(a_vals)
 print("Maximum Deceleration is",round(max(a_vals),2),"g's, occuring at an altitude of",round(alt_vals[i],2),"m and a velocity of",round(v_vals[i],2),"m/s.")
 
+for i,M in enumerate(M_vals):
+    if M > 6.009:
+        continue
+    elif M < 6.01:
+        m6_index = i
+        m6 = M
+        break
+
+print("Mach 6 occurs at an altitude of",round(alt_vals[m6_index],2),"m and a velocity of",round(v_vals[m6_index],2),"m/s.")
 
 #alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
 #alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
