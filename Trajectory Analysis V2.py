@@ -136,6 +136,7 @@ def TrajectorySolver(gamma):
     v_vals = np.zeros(int(steps))
     alt_vals = np.zeros(int(steps))
     disp_vals = np.zeros(int(steps))
+    M_vals = np.zeros(int(steps))
     i = 0
     
     #for loop calculates trajectory
@@ -147,10 +148,12 @@ def TrajectorySolver(gamma):
         alt_vals[i] = alt            #Adds altitude val to array
         disp_vals[i] = disp
         v_vals[i] = v                #Adds velocity val to array
+        M_vals[i] = Mach(v,alt)
         rho = density(alt)           #Calculates density at this step
         ga = g_acc(alt)               #Calculates grav acc at this step
         gm = g_mod(v)
         g = ga * gm
+        
         
         # if Mach(v,alt) >= 13:
         #     Cd = 1.3
@@ -184,9 +187,9 @@ def TrajectorySolver(gamma):
             print("Parachute deployed at",round(alt,2), "m and Velocity = ",\
                   round(v,2),"m/s after", t, "seconds of flight time.")
             break 
-    return alt_vals,disp_vals,v_vals,tlim
+    return alt_vals,disp_vals,v_vals,tlim,M_vals
 
-def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
+def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals,M_vals):
     
     """Plots Graphs
     params
@@ -226,6 +229,20 @@ def plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals):
     plt.ylabel("Deceleration (g's)")
     plt.show()
     
+    #Plot Mach vs Time
+    plt.plot(t_vals,M_vals)
+    plt.title("Mach Number vs Time")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Mach Number")
+    plt.show()
+    
+    #Plot Mach vs Altitude
+    plt.plot(alt_vals/1000,M_vals)
+    plt.title("Mach Number vs Altitude")
+    plt.xlabel("Altitude (km)")
+    plt.ylabel("Mach Number")
+    plt.show()
+    
     
 def a_val(v_vals):
     
@@ -258,7 +275,7 @@ def array_cleaner(gamma):
     """
     
     t_vals = np.linspace(0,time,int(steps))
-    alt_vals,disp_vals,v_vals,tlim = TrajectorySolver(gamma)   
+    alt_vals,disp_vals,v_vals,tlim,M_vals = TrajectorySolver(gamma)   
     a_vals = a_val(v_vals)
     i = 0
     check = 0
@@ -278,10 +295,11 @@ def array_cleaner(gamma):
             v_vals = np.delete(v_vals,check)
             a_vals = np.delete(a_vals,check)
             t_vals = np.delete(t_vals,check)
-        
+            M_vals = np.delete(M_vals,check)
+            #print(i)
     rho_vals = density(alt_vals) #creates density array for cliff
         
-    return alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma
+    return alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma,M_vals
 
 def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
                      disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
@@ -357,7 +375,7 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
 
 """Running the Code"""
 print(steps)
-alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma=array_cleaner(10)
+alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma,M_vals=array_cleaner(10)
 i = np.argmax(a_vals)
 print("Maximum Deceleration is",round(max(a_vals),2),"g's, occuring at an altitude of",round(alt_vals[i],2),"m and a velocity of",round(v_vals[i],2),"m/s.")
 
@@ -365,7 +383,7 @@ print("Maximum Deceleration is",round(max(a_vals),2),"g's, occuring at an altitu
 #alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
 #alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
 #alt_vals3,disp_vals3,rho_vals3,v_vals3,a_vals3,t_vals3,gamma3=array_cleaner(15)
-plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals,M_vals)
 #plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
                       #disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
                        #   disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
