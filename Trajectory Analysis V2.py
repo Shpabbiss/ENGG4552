@@ -372,7 +372,7 @@ ax2 = ax.twinx()
 ax2.plot((t_vals),alt_vals/1000,color="red")
 ax2.set_ylabel("Altitude (km)",color = "red")
 plt.title("Spacecraft Velocity and Altitude vs Time")
-plt.savefig("traj_anal.png",dpi=300)
+#plt.savefig("traj_anal.png",dpi=300)
 plt.show()
 
 #alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
