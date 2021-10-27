@@ -149,7 +149,7 @@ def TrajectorySolver(gamma):
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
         ga = g_acc(alt)               #Calculates grav acc at this step
-        gm = g_mod(vx)
+        gm = g_mod(v)
         g = ga * gm
         
         # if Mach(v,alt) >= 13:

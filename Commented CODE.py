@@ -266,10 +266,10 @@ def TrajectorySolver(gamma):
         rho = density(alt)           #Calculates density at this step
         ga = g_acc(alt)              #Calculates grav acc at this step
         gm = g_mod(v)                #Calculates gravitational modifier
-        g = ga * gm
-        liftval = lift(v,rho)
+        g = ga * gm                  #Applies gravitational modifier
+        liftval = lift(v,rho)        #Calculates lift (should be zero)
         dragval = drag(v,rho)        #Calculates Drag at this step
-        Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa)#X Direction Force Calcs
+        Fx = liftval*np.sin(fpa) - dragval*np.cos(fpa) #X Direction Force Calcs
         Fy = mass*g - liftval*np.cos(fpa) \
             - dragval*np.sin(fpa)   #Y Direction Force Calcs
         
