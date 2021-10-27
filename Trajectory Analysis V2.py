@@ -24,8 +24,8 @@ S = 0.05106375 #[m^2] - Reference Area
 #BC = mass/(S*Cd)
 
 """Loop Properties"""
-dt = 0.05 #[s]
-time = 2000 #[s]
+dt = 2 #[s]
+time = 204000 #[s]
 steps = time/dt + 1
 
 
@@ -361,14 +361,38 @@ alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma=array_cleaner(10)
 i = np.argmax(a_vals)
 print("Maximum Deceleration is",round(max(a_vals),2),"g's, occuring at an altitude of",round(alt_vals[i],2),"m and a velocity of",round(v_vals[i],2),"m/s.")
 
+plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+
+
+fig,ax = plt.subplots()
+ax.plot((t_vals),v_vals/1000,color="blue")
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Velocity (km/s)",color = "blue")
+ax2 = ax.twinx()
+ax2.plot((t_vals),alt_vals/1000,color="red")
+ax2.set_ylabel("Altitude (km)",color = "red")
+plt.title("Spacecraft Velocity and Altitude vs Time")
+plt.savefig("traj_anal.png",dpi=300)
+plt.show()
 
 #alt_vals1,disp_vals1,rho_vals1,v_vals1,a_vals1,t_vals1,gamma1=array_cleaner(5)
 #alt_vals2,disp_vals2,rho_vals2,v_vals2,a_vals2,t_vals2,gamma2=array_cleaner(10)
 #alt_vals3,disp_vals3,rho_vals3,v_vals3,a_vals3,t_vals3,gamma3=array_cleaner(15)
-plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+#plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
 #plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
                       #disp_vals1,v_vals1,a_vals1,t_vals1,gamma1,alt_vals2,\
                        #   disp_vals2,v_vals2,a_vals2,t_vals2,gamma2,alt_vals3,\
                         #      disp_vals3,v_vals3,a_vals3,t_vals3,gamma3)
 
+#a_list = []
+#for i in np.linspace(0,20,11):
+#    alt_vals,disp_vals,rho_vals,v_vals,a_vals,t_vals,gamma=array_cleaner(i)
+#    a_list.append(max(a_vals))
+#    
+#plt.plot(np.linspace(0,20,11),a_list)
+#plt.title("Max Decelerartion vs Flight Path Angle")
+#plt.xlabel("Flight Path Angle (Degrees)")
+#plt.ylabel("Max Deceleration (g's)")
+#plt.show()
 
+    

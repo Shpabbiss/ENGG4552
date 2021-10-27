@@ -1026,84 +1026,130 @@ def runbaby(fpa):
     #     print("\nThe total heat load =", round(Heat_Load_in_master_list[i], 4), "MJ")
     #     print("\nThe total heat load =", round(dt*sum(q_conv_master_list[i]), 4), "MJ/m^2")
     """
-    return fpa, altop+273.15, Hotbox+273.15, Hottt+273.15, HLOAD, a_vals, QMAX
-angles = []
-tempfoam = []
-tempcube = []
-tempsurf = []
-totalheat = []
-gvals = []
-heatflux = []
-def checker():
-    for i in np.linspace(0.1,25):
-        a,tf,tc,ts,th,av,hf = runbaby(i) 
-        angles.append(a)
-        tempfoam.append(tf)
-        tempcube.append(tc)
-        tempsurf.append(ts)
-        totalheat.append(th)
-        gvals.append(max(av))
-        heatflux.append(hf)
-checker()
+    return fpa, Ta0_List, Hotbox+273.15, Ts0_List, HLOAD, a_vals, q_net_list,t_vals
 
+fpa1, tempfoam1, tempcube1, tempsurf1,totalheat1,gvals1,heatflux1,t_vals1 = runbaby(8)
+fpa2, tempfoam2, tempcube2, tempsurf2,totalheat2,gvals2,heatflux2,t_vals2 = runbaby(10)
+fpa3, tempfoam3, tempcube3, tempsurf3,totalheat3,gvals3,heatflux3,t_vals3 = runbaby(20)
 
-
-FoamFail = []
-SurfaceFail = []
-
-def wrecker():
-    for i in enumerate(tempfoam):
-        if tempfoam[i[0]] >= 200 + 273:
-            FoamFail.append(angles[i[0]])
-def mecker():
-    for i in enumerate(tempsurf):
-        if tempsurf[i[0]] >= 3650 + 273:
-            SurfaceFail.append(angles[i[0]])
-wrecker()
-mecker()    
-
-print('Foam Temperature Failure Angles =',FoamFail)
-print('Surface Temperature Failure Angles =',SurfaceFail)  
-    
-plt.plot(angles,tempfoam)
-plt.title("Foam Max Temperature Plotted as a Function of Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('Temperature (K)')
-#plt.legend()
+plt.figure(figsize=(5.54,5.54 ))
+plt.plot(t_vals1,tempfoam1,label = '8 degrees')
+plt.plot(t_vals2,tempfoam2,label = '10 degrees')
+plt.plot(t_vals3,tempfoam3,label = '20 degrees')
+plt.title("Structural Temperature vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Temperature (K)")
+plt.legend()
 plt.show()
 
-plt.plot(angles,tempcube)
-plt.title("Cubesat Max Temperature Plotted as a Function of Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('Temperature (K)')
-#plt.legend()
+plt.figure(figsize=(5.54,5.54 ))
+plt.plot(t_vals1,gvals1,label = '8 degrees')
+plt.plot(t_vals2,gvals2,label = '10 degrees')
+plt.plot(t_vals3,gvals3,label = '20 degrees')
+plt.title("Deceleration vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Deceleration (g's)")
+plt.legend()
 plt.show()
 
-plt.plot(angles,tempsurf)
-plt.title("Surface Max Temperature Plotted as a Function of Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('Temperature (K)')
-#plt.legend()
+
+plt.figure(figsize=(5.54,5.54 ))
+plt.plot(t_vals1,tempsurf1,label = '8 degrees')
+plt.plot(t_vals2,tempsurf2,label = '10 degrees')
+plt.plot(t_vals3,tempsurf3,label = '20 degrees')
+plt.title("Surface Temperature vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Temperature (K)")
+plt.legend()
 plt.show()
 
-plt.plot(angles,totalheat)
-plt.title("Total Heat Load Plotted as a Function of Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('Heat (MJ)')
-#plt.legend()
+plt.figure(figsize=(5.54,5.54 ))
+plt.plot(t_vals1,heatflux1,label = '8 degrees')
+plt.plot(t_vals2,heatflux2,label = '10 degrees')
+plt.plot(t_vals3,heatflux3,label = '20 degrees')
+plt.title("Heat Flux vs Time")
+plt.xlabel("Time (s)")
+plt.ylabel("Heat Flux (MW/m^2)")
+plt.legend()
 plt.show()
 
-plt.plot(angles,heatflux)
-plt.title("Max Instantaneous Heat Flux Plotted as a Function of\
-          Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('Heat Flux (MW/m^2)')
-#plt.legend()
-plt.show()
-
-plt.plot(angles,gvals)
-plt.title("Max g-load as a Function of Flight Path Angle")
-plt.xlabel('Angle (degree)')
-plt.ylabel('g-load (g)')
-#plt.legend()
-plt.show()
+#angles = []
+#tempfoam = []
+#tempcube = []
+#tempsurf = []
+#totalheat = []
+#gvals = []
+#heatflux = []
+#def checker():
+#    for i in np.linspace(0.1,25):
+#        a,tf,tc,ts,th,av,hf = runbaby(i) 
+#        angles.append(a)
+#        tempfoam.append(tf)
+#        tempcube.append(tc)
+#        tempsurf.append(ts)
+#        totalheat.append(th)
+#        gvals.append(max(av))
+#        heatflux.append(hf)
+#checker()
+#
+#
+#
+#FoamFail = []
+#SurfaceFail = []
+#
+#def wrecker():
+#    for i in enumerate(tempfoam):
+#        if tempfoam[i[0]] >= 200 + 273:
+#            FoamFail.append(angles[i[0]])
+#def mecker():
+#    for i in enumerate(tempsurf):
+#        if tempsurf[i[0]] >= 3650 + 273:
+#            SurfaceFail.append(angles[i[0]])
+#wrecker()
+#mecker()    
+#
+#print('Foam Temperature Failure Angles =',FoamFail)
+#print('Surface Temperature Failure Angles =',SurfaceFail)  
+#    
+#plt.plot(angles,tempfoam)
+#plt.title("Foam Max Temperature Plotted as a Function of Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('Temperature (K)')
+##plt.legend()
+#plt.show()
+#
+#plt.plot(angles,tempcube)
+#plt.title("Cubesat Max Temperature Plotted as a Function of Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('Temperature (K)')
+##plt.legend()
+#plt.show()
+#
+#plt.plot(angles,tempsurf)
+#plt.title("Surface Max Temperature Plotted as a Function of Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('Temperature (K)')
+##plt.legend()
+#plt.show()
+#
+#plt.plot(angles,totalheat)
+#plt.title("Total Heat Load Plotted as a Function of Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('Heat (MJ)')
+##plt.legend()
+#plt.show()
+#
+#plt.plot(angles,heatflux)
+#plt.title("Max Instantaneous Heat Flux Plotted as a Function of\
+#          Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('Heat Flux (MW/m^2)')
+##plt.legend()
+#plt.show()
+#
+#plt.plot(angles,gvals)
+#plt.title("Max g-load as a Function of Flight Path Angle")
+#plt.xlabel('Angle (degree)')
+#plt.ylabel('g-load (g)')
+##plt.legend()
+#plt.show()
