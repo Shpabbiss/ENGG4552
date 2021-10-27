@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg xmlns:svg="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="425.20" height="425.20"
+     version="1.0">
+<title></title>
+<desc></desc>
+<!-- drawing begins here -->
+<text x="226.77" y="36.45" style="font-size:16pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >flow domain for heatshield</text>
+<polygon points="85.04,364.45 86.17,364.45 87.31,364.45 88.44,364.45 89.57,364.45 90.71,364.45 91.84,364.45 92.98,364.45 94.11,364.45 95.24,364.45 96.38,364.45 97.51,364.45 98.65,364.45 99.78,364.45 100.91,364.45 102.05,364.45 103.18,364.45 104.31,364.45 105.45,364.45 106.58,364.45 107.72,364.45 108.85,364.45 109.98,364.45 111.12,364.45 112.25,364.45 113.39,364.45 114.52,364.45 115.65,364.45 116.79,364.45 117.92,364.45 119.06,364.45 118.94,362.84 118.87,361.23 118.85,359.62 118.89,358.00 118.97,356.39 119.11,354.78 119.30,353.18 119.53,351.58 119.82,350.00 120.16,348.42 120.55,346.86 120.98,345.32 121.47,343.79 122.00,342.28 122.58,340.79 123.21,339.32 123.88,337.87 124.60,336.45 125.36,335.06 126.17,333.69 127.01,332.36 127.90,331.06 128.84,329.79 129.81,328.55 130.81,327.35 131.86,326.19 132.94,325.06 134.06,323.98 135.21,322.94 136.39,321.93 135.64,321.73 134.88,321.53 134.13,321.33 133.37,321.12 132.62,320.92 131.86,320.72 131.10,320.52 130.35,320.31 129.59,320.11 128.84,319.91 128.08,319.71 127.32,319.51 126.57,319.30 125.81,319.10 125.06,318.90 124.30,318.70 123.54,318.49 122.79,318.29 122.03,318.09 121.28,317.89 120.52,317.68 119.76,317.48 119.01,317.28 118.25,317.08 117.50,316.87 116.74,316.67 115.99,316.47 115.23,316.27 114.47,316.06 113.72,315.86 111.92,316.60 110.16,317.43 108.43,318.34 106.74,319.33 105.09,320.39 103.49,321.54 101.93,322.76 100.43,324.05 98.98,325.41 97.59,326.84 96.26,328.33 95.00,329.88 93.79,331.50 92.66,333.16 91.59,334.88 90.60,336.65 89.68,338.46 88.84,340.32 88.07,342.21 87.38,344.14 86.77,346.10 86.25,348.08 85.80,350.09 85.44,352.12 85.16,354.16 84.97,356.21 84.86,358.27 84.83,360.33 84.89,362.40 85.04,364.45" style="fill:green;fill-opacity:0.5"/>
+<polygon points="85.04,364.45 86.17,364.45 87.31,364.45 88.44,364.45 89.57,364.45 90.71,364.45 91.84,364.45 92.98,364.45 94.11,364.45 95.24,364.45 96.38,364.45 97.51,364.45 98.65,364.45 99.78,364.45 100.91,364.45 102.05,364.45 103.18,364.45 104.31,364.45 105.45,364.45 106.58,364.45 107.72,364.45 108.85,364.45 109.98,364.45 111.12,364.45 112.25,364.45 113.39,364.45 114.52,364.45 115.65,364.45 116.79,364.45 117.92,364.45 119.06,364.45 118.94,362.84 118.87,361.23 118.85,359.62 118.89,358.00 118.97,356.39 119.11,354.78 119.30,353.18 119.53,351.58 119.82,350.00 120.16,348.42 120.55,346.86 120.98,345.32 121.47,343.79 122.00,342.28 122.58,340.79 123.21,339.32 123.88,337.87 124.60,336.45 125.36,335.06 126.17,333.69 127.01,332.36 127.90,331.06 128.84,329.79 129.81,328.55 130.81,327.35 131.86,326.19 132.94,325.06 134.06,323.98 135.21,322.94 136.39,321.93 135.64,321.73 134.88,321.53 134.13,321.33 133.37,321.12 132.62,320.92 131.86,320.72 131.10,320.52 130.35,320.31 129.59,320.11 128.84,319.91 128.08,319.71 127.32,319.51 126.57,319.30 125.81,319.10 125.06,318.90 124.30,318.70 123.54,318.49 122.79,318.29 122.03,318.09 121.28,317.89 120.52,317.68 119.76,317.48 119.01,317.28 118.25,317.08 117.50,316.87 116.74,316.67 115.99,316.47 115.23,316.27 114.47,316.06 113.72,315.86 111.92,316.60 110.16,317.43 108.43,318.34 106.74,319.33 105.09,320.39 103.49,321.54 101.93,322.76 100.43,324.05 98.98,325.41 97.59,326.84 96.26,328.33 95.00,329.88 93.79,331.50 92.66,333.16 91.59,334.88 90.60,336.65 89.68,338.46 88.84,340.32 88.07,342.21 87.38,344.14 86.77,346.10 86.25,348.08 85.80,350.09 85.44,352.12 85.16,354.16 84.97,356.21 84.86,358.27 84.83,360.33 84.89,362.40 85.04,364.45" style="fill:none;stroke:black;stroke-width:0.28;stroke-linecap:round;stroke-opacity:0.5"/>
+<polygon points="113.72,315.86 114.47,316.06 115.23,316.27 115.99,316.47 116.74,316.67 117.50,316.87 118.25,317.08 119.01,317.28 119.76,317.48 120.52,317.68 121.28,317.89 122.03,318.09 122.79,318.29 123.54,318.49 124.30,318.70 125.06,318.90 125.81,319.10 126.57,319.30 127.32,319.51 128.08,319.71 128.84,319.91 129.59,320.11 130.35,320.31 131.10,320.52 131.86,320.72 132.62,320.92 133.37,321.12 134.13,321.33 134.88,321.53 135.64,321.73 136.39,321.93 136.47,321.86 136.55,321.79 136.63,321.72 136.72,321.66 136.80,321.61 136.89,321.56 136.99,321.51 137.08,321.47 137.18,321.43 137.28,321.40 137.38,321.38 137.48,321.36 137.58,321.34 137.68,321.33 137.78,321.33 137.88,321.33 137.99,321.34 138.09,321.36 138.19,321.38 138.29,321.40 138.39,321.43 138.48,321.47 138.58,321.51 138.67,321.56 138.76,321.61 138.85,321.66 138.93,321.72 139.02,321.79 139.09,321.86 139.17,321.93 139.45,321.73 139.74,321.53 140.02,321.33 140.30,321.12 140.59,320.92 140.87,320.72 141.15,320.52 141.44,320.31 141.72,320.11 142.00,319.91 142.29,319.71 142.57,319.51 142.85,319.30 143.14,319.10 143.42,318.90 143.71,318.70 143.99,318.49 144.27,318.29 144.56,318.09 144.84,317.89 145.12,317.68 145.41,317.48 145.69,317.28 145.97,317.08 146.26,316.87 146.54,316.67 146.82,316.47 147.11,316.27 147.39,316.06 147.67,315.86 146.58,315.47 145.48,315.10 144.37,314.77 143.25,314.45 142.13,314.17 141.00,313.91 139.87,313.68 138.73,313.47 137.59,313.29 136.45,313.14 135.30,313.02 134.15,312.92 133.00,312.85 131.85,312.81 130.70,312.80 129.54,312.81 128.39,312.85 127.24,312.92 126.09,313.02 124.94,313.14 123.80,313.29 122.66,313.47 121.52,313.68 120.39,313.91 119.26,314.17 118.14,314.45 117.02,314.77 115.91,315.10 114.81,315.47 113.72,315.86" style="fill:green;fill-opacity:0.5"/>
+<polygon points="113.72,315.86 114.47,316.06 115.23,316.27 115.99,316.47 116.74,316.67 117.50,316.87 118.25,317.08 119.01,317.28 119.76,317.48 120.52,317.68 121.28,317.89 122.03,318.09 122.79,318.29 123.54,318.49 124.30,318.70 125.06,318.90 125.81,319.10 126.57,319.30 127.32,319.51 128.08,319.71 128.84,319.91 129.59,320.11 130.35,320.31 131.10,320.52 131.86,320.72 132.62,320.92 133.37,321.12 134.13,321.33 134.88,321.53 135.64,321.73 136.39,321.93 136.47,321.86 136.55,321.79 136.63,321.72 136.72,321.66 136.80,321.61 136.89,321.56 136.99,321.51 137.08,321.47 137.18,321.43 137.28,321.40 137.38,321.38 137.48,321.36 137.58,321.34 137.68,321.33 137.78,321.33 137.88,321.33 137.99,321.34 138.09,321.36 138.19,321.38 138.29,321.40 138.39,321.43 138.48,321.47 138.58,321.51 138.67,321.56 138.76,321.61 138.85,321.66 138.93,321.72 139.02,321.79 139.09,321.86 139.17,321.93 139.45,321.73 139.74,321.53 140.02,321.33 140.30,321.12 140.59,320.92 140.87,320.72 141.15,320.52 141.44,320.31 141.72,320.11 142.00,319.91 142.29,319.71 142.57,319.51 142.85,319.30 143.14,319.10 143.42,318.90 143.71,318.70 143.99,318.49 144.27,318.29 144.56,318.09 144.84,317.89 145.12,317.68 145.41,317.48 145.69,317.28 145.97,317.08 146.26,316.87 146.54,316.67 146.82,316.47 147.11,316.27 147.39,316.06 147.67,315.86 146.58,315.47 145.48,315.10 144.37,314.77 143.25,314.45 142.13,314.17 141.00,313.91 139.87,313.68 138.73,313.47 137.59,313.29 136.45,313.14 135.30,313.02 134.15,312.92 133.00,312.85 131.85,312.81 130.70,312.80 129.54,312.81 128.39,312.85 127.24,312.92 126.09,313.02 124.94,313.14 123.80,313.29 122.66,313.47 121.52,313.68 120.39,313.91 119.26,314.17 118.14,314.45 117.02,314.77 115.91,315.10 114.81,315.47 113.72,315.86" style="fill:none;stroke:black;stroke-width:0.28;stroke-linecap:round;stroke-opacity:0.5"/>
+<path d="M 119.06,364.45 L 118.94,362.84 L 118.87,361.23 L 118.85,359.62 L 118.89,358.00 L 118.97,356.39 L 119.11,354.78 L 119.30,353.18 L 119.53,351.58 L 119.82,350.00 L 120.16,348.42 L 120.55,346.86 L 120.98,345.32 L 121.47,343.79 L 122.00,342.28 L 122.58,340.79 L 123.21,339.32 L 123.88,337.87 L 124.60,336.45 L 125.36,335.06 L 126.17,333.69 L 127.01,332.36 L 127.90,331.06 L 128.84,329.79 L 129.81,328.55 L 130.81,327.35 L 131.86,326.19 L 132.94,325.06 L 134.06,323.98 L 135.21,322.94 L 136.39,321.93" style="fill:none;stroke:black;stroke-width:1.42;stroke-linecap:round;stroke-opacity:1"/>
+<circle cx="85.04" cy="364.45" r="2.83" style="fill:black" />
+<text x="85.04" y="360.20" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >a</text>
+<circle cx="119.06" cy="364.45" r="2.83" style="fill:black" />
+<text x="119.06" y="360.20" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >b</text>
+<circle cx="119.06" cy="355.34" r="2.83" style="fill:black" />
+<text x="119.06" y="351.09" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >c</text>
+<circle cx="136.39" cy="321.93" r="2.83" style="fill:black" />
+<text x="136.39" y="317.68" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >d</text>
+<circle cx="137.50" cy="325.58" r="2.83" style="fill:black" />
+<text x="137.50" y="321.33" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >e</text>
+<circle cx="139.17" cy="321.93" r="2.83" style="fill:black" />
+<text x="139.17" y="317.68" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >f</text>
+<circle cx="85.04" cy="355.34" r="2.83" style="fill:black" />
+<text x="85.04" y="351.09" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >g</text>
+<circle cx="113.72" cy="315.86" r="2.83" style="fill:black" />
+<text x="113.72" y="311.61" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >h</text>
+<circle cx="147.67" cy="315.86" r="2.83" style="fill:black" />
+<text x="147.67" y="311.61" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >i</text>
+<circle cx="171.52" cy="334.08" r="2.83" style="fill:black" />
+<text x="171.52" y="329.83" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >j</text>
+<circle cx="158.74" cy="334.08" r="2.83" style="fill:black" />
+<text x="158.74" y="329.83" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >k</text>
+<circle cx="158.74" cy="328.01" r="2.83" style="fill:black" />
+<text x="158.74" y="323.76" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >l</text>
+<g opacity="1" >
+<line x1="85.04" y1="379.64" x2="368.50" y2="379.64" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="85.04" y1="379.64" x2="85.04" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="141.73" y1="379.64" x2="141.73" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="198.43" y1="379.64" x2="198.43" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="255.12" y1="379.64" x2="255.12" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="311.81" y1="379.64" x2="311.81" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="368.50" y1="379.64" x2="368.50" y2="385.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+</g>
+<text x="85.04" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.0</text>
+<text x="141.73" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.2</text>
+<text x="198.43" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.4</text>
+<text x="255.12" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.6</text>
+<text x="311.81" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.8</text>
+<text x="368.50" y="397.86" style="font-size:10pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >1.0</text>
+<text x="226.77" y="410.01" style="font-size:12pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >x</text>
+<g opacity="1" >
+<line x1="70.87" y1="364.45" x2="70.87" y2="60.74" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="364.45" x2="65.20" y2="364.45" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="303.71" x2="65.20" y2="303.71" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="242.97" x2="65.20" y2="242.97" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="182.23" x2="65.20" y2="182.23" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="121.48" x2="65.20" y2="121.48" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+<line x1="70.87" y1="60.74" x2="65.20" y2="60.74" style="fill:none;stroke:black;stroke-width:0.85;stroke-linecap:round;stroke-opacity:1" />
+</g>
+<text x="65.20" y="364.45" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.0</text>
+<text x="65.20" y="303.71" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.2</text>
+<text x="65.20" y="242.97" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.4</text>
+<text x="65.20" y="182.23" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.6</text>
+<text x="65.20" y="121.48" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >0.8</text>
+<text x="65.20" y="60.74" style="font-size:10pt;text-anchor:end;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >1.0</text>
+<text x="28.35" y="212.60" style="font-size:12pt;text-anchor:middle;fill:black;stroke:none;font-weight:normal;font-family:sanserif" >y</text>
+<!-- end of drawing -->
+</svg>
