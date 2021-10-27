@@ -174,6 +174,13 @@ def g_acc(alt):
     return g
 
 def g_mod(v):
+    """Calculates gravitational acceleration modifier based on velocity.
+    params
+    input
+    vx [float] horizontal velocity in m/s
+    output
+    modifier
+    """
     if v >= 7800:
         g_mod = 0
     else:
@@ -254,11 +261,11 @@ def TrajectorySolver(gamma):
 
         v = np.sqrt((vx**2)+(vy**2)) #Gets total velocity vector
         alt_vals[i] = alt            #Adds altitude val to array
-        disp_vals[i] = disp
+        disp_vals[i] = disp          #Adds displacement value to array
         v_vals[i] = v                #Adds velocity val to array
         rho = density(alt)           #Calculates density at this step
-        ga = g_acc(alt)               #Calculates grav acc at this step
-        gm = g_mod(v)
+        ga = g_acc(alt)              #Calculates grav acc at this step
+        gm = g_mod(v)                #Calculates gravitational modifier
         g = ga * gm
         liftval = lift(v,rho)
         dragval = drag(v,rho)        #Calculates Drag at this step
