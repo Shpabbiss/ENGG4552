@@ -300,6 +300,7 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     """
     
     #Plot Altitude vs Time
+    plt.figure(figsize=(5.54,5.54 ))
     plt.plot(t_vals, alt_vals,label="Initial FPA = "+str(gamma))
     #plt.plot(t_vals1, alt_vals1,label="Initial FPA = " + str(gamma1))
     #plt.plot(t_vals2, alt_vals2,label="Initial FPA = " + str(gamma2))
@@ -311,6 +312,7 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     plt.show()
     
     #Plot Altitude vs Displacement over Ground
+    plt.figure(figsize=(5.54,5.54 ))
     plt.plot(disp_vals/1E3, alt_vals/1E3,label="Initial FPA = "+str(gamma))
     #plt.plot(disp_vals1/1E3, alt_vals1/1E3,label="Initial FPA = "+str(gamma1))
     #plt.plot(disp_vals2/1E3, alt_vals2/1E3,label="Initial FPA = "+str(gamma2))
@@ -322,6 +324,7 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     plt.show()
     
     #Plot Velocity
+    plt.figure(figsize=(5.54,5.54 ))
     plt.plot(t_vals, v_vals,label="Initial FPA = "+str(gamma))
     #plt.plot(t_vals1, v_vals1,label="Initial FPA = " + str(gamma1))
     #plt.plot(t_vals2, v_vals2,label="Initial FPA = " + str(gamma2))
@@ -333,6 +336,7 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     plt.show()
     
     #Plot Decceleration
+    #plt.figure(figsize=(5.54,5.54 ))
     plt.plot(t_vals, a_vals,label="Initial FPA = "+str(gamma))
     #plt.plot(t_vals1, a_vals1,label="Initial FPA = " + str(gamma1))
     #plt.plot(t_vals2, a_vals2,label="Initial FPA = " + str(gamma2))
@@ -341,9 +345,11 @@ def plot_comparisons(alt_vals,disp_vals,v_vals,a_vals,t_vals,gamma,alt_vals1,\
     plt.legend()
     plt.xlabel("Time (s)")
     plt.ylabel("Deceleration (g's)")
+    plt.savefig("decel.png",dpi=300)
     plt.show()
     
     #Plot Decceleration vs Altitude
+    plt.figure(figsize=(5.54,5.54 ))
     plt.plot(alt_vals/1E3, a_vals,label="Initial FPA = "+str(gamma))
     #plt.plot(alt_vals1/1E3, a_vals1,label="Initial FPA = " + str(gamma1))
     #plt.plot(alt_vals2/1E3, a_vals2,label="Initial FPA = " + str(gamma2))
@@ -362,6 +368,7 @@ i = np.argmax(a_vals)
 print("Maximum Deceleration is",round(max(a_vals),2),"g's, occuring at an altitude of",round(alt_vals[i],2),"m and a velocity of",round(v_vals[i],2),"m/s.")
 
 plotter(t_vals,alt_vals,disp_vals,v_vals,a_vals)
+
 
 
 fig,ax = plt.subplots()
